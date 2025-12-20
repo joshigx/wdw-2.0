@@ -53,9 +53,14 @@
   "deploy": {
     "project": "3834accd-525e-4039-a838-ccf2786d1542",
     "exclude": [
-      "**/node_modules"
+      "**/node_modules",
+      ".react-router/", // ← Hinzufügen: React Router temp files
+      "dist/", // ← Falls Build-Output
+      "*.log", // ← Logs
+      "deno.lock" // ← Lockfile
     ],
     "include": [],
-    "entrypoint": "server.ts"
+    "entrypoint": "server.ts",
+    "detector": "deno"
   }
 }
