@@ -62,5 +62,5 @@
     "include": [],
     "entrypoint": "server.ts",
     "detector": "deno"
-  }
+  } 
 }
