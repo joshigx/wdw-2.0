@@ -11,4 +11,5 @@ export default [
     index("routes/paramlos.tsx"),
     route(":pid", "routes/paramtest.tsx"),
   ]),
+  route("test", "routes/test.tsx"),
 ] satisfies RouteConfig;
