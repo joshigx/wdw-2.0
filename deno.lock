@@ -27,7 +27,7 @@
     "npm:dotenv@^17.2.3": "17.2.3",
     "npm:isbot@5.1.28": "5.1.28",
     "npm:pg@8.16.3": "8.16.3",
-    "npm:postgres@^3.4.7": "3.4.7",
+    "npm:postgres@3.4.7": "3.4.7",
     "npm:prisma@^7.2.0": "7.2.0_@types+react@19.2.7_react@19.2.2_react-dom@19.2.2__react@19.2.2",
     "npm:react-dom@19.2.2": "19.2.2_react@19.2.2",
     "npm:react-router@7.10.1": "7.10.1_react@19.2.2_react-dom@19.2.2__react@19.2.2",
@@ -2256,6 +2256,7 @@
       "npm:@types/react@19.2.7",
       "npm:isbot@5.1.28",
       "npm:pg@8.16.3",
+      "npm:postgres@3.4.7",
       "npm:react-dom@19.2.2",
       "npm:react-router@7.10.1",
       "npm:react@19.2.2",
@@ -2270,7 +2271,6 @@
         "npm:@types/node@^25.0.3",
         "npm:@types/pg@^8.16.0",
         "npm:dotenv@^17.2.3",
-        "npm:postgres@^3.4.7",
         "npm:prisma@^7.2.0"
       ]
     }
