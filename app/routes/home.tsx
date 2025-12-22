@@ -1,5 +1,5 @@
 import type { Route } from "../../.react-router/types/app/routes/+types/home.ts";
-import prisma from '~/lib/prisma.ts'
+import prisma from '../lib/prisma.ts'
 
 export function meta({}: Route.MetaArgs) {
   return [
