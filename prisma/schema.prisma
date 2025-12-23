@@ -12,9 +12,12 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   hobby String?
+  color String?
   name  String?
   posts Post[]
 }
+
+
 
 model Post {
   id        Int     @id @default(autoincrement())

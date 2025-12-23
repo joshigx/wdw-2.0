@@ -79,7 +79,13 @@ Built with ❤️ using React Router.
 
 ## Introspection workflow
 see here: https://www.prisma.io/docs/orm/prisma-schema/introspection
+npx prisma db pull
 1. Change the database schema (e.g. using plain SQL)
 2. Run prisma db pull to update the Prisma schema
 3. Run prisma generate to update Prisma Client
 4. Use the updated Prisma Client in your application
+
+## Migration
+https://www.prisma.io/docs/orm/prisma-migrate/getting-started
+npx prisma migrate dev --name migrate_name
+dx prisma... also works
