@@ -1,6 +1,7 @@
 import type { Route } from "../../.react-router/types/app/routes/+types/home.ts";
 import type { User } from "../generated/prisma/client.ts";
 import { createPrismaClient } from "../lib/prisma.server.ts";
+import type { PrismaClient } from "../generated/prisma/client.ts";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -9,14 +10,14 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export async function loader() {  
+export async function loader({ }: Route.LoaderArgs) {
 
 
-  const prisma = createPrismaClient();
+  const prisma: PrismaClient = createPrismaClient();
   try {
     const users: User[] = await prisma.user.findMany();
 
-    return { users: users};
+    return { users: users };
   }
   finally {
     await prisma.$disconnect();
