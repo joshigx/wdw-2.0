@@ -1,6 +1,6 @@
 import type { Route } from "../../.react-router/types/app/routes/+types/home.ts";
 //import type { User } from "../generated/prisma/client.ts";
-import type { UserModel } from "../generated/prisma/models.ts";
+import type { UserModel } from "../generated/prisma/models/User.ts";
 import { createPrismaClient } from "../lib/prisma.server.ts";
 import type { PrismaClient } from "../generated/prisma/client.ts";
 
