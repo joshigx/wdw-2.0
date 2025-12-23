@@ -3,6 +3,7 @@ import type { Route } from "../../.react-router/types/app/routes/+types/home.ts"
 import type { UserModel as User } from "../generated/prisma/models/User.ts";
 import { createPrismaClient } from "../lib/prisma.server.ts";
 import type { PrismaClient } from "../generated/prisma/client.ts";
+import Title from "../components/title.tsx"
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -20,7 +21,7 @@ export async function loader({ }: Route.LoaderArgs) {
       where: {
         name: "Tim Schubert"
       }
-      
+
     });
 
     return { users: users };
@@ -36,6 +37,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const { users } = loaderData;
   return (
     <div className="min-h-screen flex flex-col items-center justify-center -mt-16">
+      <Title title=" n" />
       <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
         Superblog
       </h1>
