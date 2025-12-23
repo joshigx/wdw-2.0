@@ -89,3 +89,14 @@ npx prisma db pull
 https://www.prisma.io/docs/orm/prisma-migrate/getting-started
 npx prisma migrate dev --name migrate_name
 dx prisma... also works
+
+## How to define Models in schema.prisma
+https://www.prisma.io/docs/orm/prisma-schema/data-model/models
+
+https://www.prisma.io/docs/orm/prisma-schema/data-model/relations
+https://www.prisma.io/docs/orm/reference/prisma-schema-reference#model-field-scalar-types
+
+Attributes: https://www.prisma.io/docs/orm/reference/prisma-schema-reference#attributes
+
+## Queries:
+https://www.prisma.io/docs/orm/reference/prisma-client-reference#model-queries

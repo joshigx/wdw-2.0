@@ -16,7 +16,12 @@ export async function loader({ }: Route.LoaderArgs) {
 
   const prisma: PrismaClient = createPrismaClient();
   try {
-    const users: User[] = await prisma.user.findMany();
+    const users: User[] = await prisma.user.findMany({
+      where: {
+        name: "Tim Schubert"
+      }
+      
+    });
 
     return { users: users };
   }

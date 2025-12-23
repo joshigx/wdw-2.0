@@ -54,7 +54,12 @@
       "./.react-router/types"
     ]
   },
-  "allowScripts": ["npm:@prisma/engines@7.2.0", "npm:@tailwindcss/oxide@4.1.7", "npm:esbuild@0.25.12", "npm:prisma@7.2.0"],
+  "allowScripts": [
+    "npm:@prisma/engines@7.2.0",
+    "npm:@tailwindcss/oxide@4.1.7",
+    "npm:esbuild@0.25.12",
+    "npm:prisma@7.2.0"
+  ],
   "deploy": {
     "org": "brightfuture",
     "app": "deno-vite-react"
