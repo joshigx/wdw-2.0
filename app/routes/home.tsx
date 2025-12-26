@@ -37,7 +37,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const { users } = loaderData;
   return (
     <div className="min-h-screen flex flex-col items-center justify-center -mt-16">
-      <Title title=" n" />
+      <Title title="Test Title" />
       <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
         Superblog
       </h1>

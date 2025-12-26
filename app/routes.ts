@@ -11,6 +11,6 @@ export default [
     index("./routes/home.tsx"),
     route("about", "./routes/about.tsx"),
   ]
-
   ),
+  route("app","./routes/dnd-test.tsx")
 ] satisfies RouteConfig;
