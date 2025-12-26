@@ -10,7 +10,7 @@ import Droppable from '../components/droppable.tsx';
 
 
 export default function Dnd() {
-  const containers = ['A', 'B', 'C'];
+  const containers = ['A', 'B', 'C', 'D'];
   const [parent, setParent] = useState<UniqueIdentifier | null>(null);
   //const id = useId();
 

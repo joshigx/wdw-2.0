@@ -1,10 +1,16 @@
 
-import React from 'react';
+import { type ReactNode } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 
-export default function Droppable({ children, id }: { children: React.ReactNode, id: string }) {
+
+type Props = {
+  children: ReactNode
+  id: string
+}
+
+export default function Droppable(props: Props) {
   const { isOver, setNodeRef } = useDroppable({
-    id: id,
+    id: props.id,
   });
   
   // const style = {
@@ -19,7 +25,7 @@ export default function Droppable({ children, id }: { children: React.ReactNode,
 
   return (
     <div ref={setNodeRef} style={style}>
-      {children}
+      {props.children}
     </div>
   );
 }
