@@ -16,10 +16,6 @@ export default function Dnd() {
   const [parent, setParent] = useState<UniqueIdentifier | null>(null);
   //const id = useId();
 
-  const draggableMarkup = (
-    <Draggable position={position} id="draggable">Drag me</Draggable>
-  );
-
   function handleDragEnd(event: DragEndEvent) {
 
     const { delta } = event;
@@ -39,16 +35,13 @@ export default function Dnd() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
 
-      {parent === null ? draggableMarkup : null}
-
-
-
+      <Draggable position={position} id="draggable">Drag me</Draggable>
 
       {containers.map((id) => (
         // We updated the Droppable component so it would accept an `id`
         // prop and pass it to `useDroppable`
         <Droppable key={id} id={id}>
-          {parent === id ? draggableMarkup : 'Drop here in Container: ' + id}
+          {'Drop here in Container: ' + id}
         </Droppable>
       ))}
     </DndContext>
