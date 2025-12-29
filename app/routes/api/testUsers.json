@@ -1,0 +1,26 @@
+[
+  {
+    "id": "001",
+    "locationId": "1",
+    "name": "Anna",
+    "answer": "Ich bevorzuge Remote-Arbeit"
+  },
+  {
+    "id": "002",
+    "locationId": "1",
+    "name": "Max",
+    "answer": "Büroarbeit ist mir wichtig"
+  },
+  {
+    "id": "003",
+    "locationId": "1",
+    "name": "Sarah",
+    "answer": "Hybrid-Modell wäre ideal"
+  },
+  {
+    "id": "004",
+    "locationId": "1",
+    "name": "Tom",
+    "answer": "Flexibilität ist entscheidend"
+  }
+]
