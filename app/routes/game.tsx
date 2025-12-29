@@ -3,7 +3,7 @@
 import { DndContext } from "@dnd-kit/core";
 import type { Route } from "./+types/game.ts";
 
-import Draggable from "../components/userAnswerDraggable.tsx";
+import Draggable from "../components/userAnswerDraggablev2.tsx";
 import users from "./api/testUsers.json" with { type: "json" };
 
 interface Room {

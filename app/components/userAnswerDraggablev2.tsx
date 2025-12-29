@@ -1,11 +1,13 @@
-import { useDraggable } from "@dnd-kit/core";
 //import { CSS } from '@dnd-kit/utilities';
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useCallback, useState } from "react";
+import { useCustomDraggable } from "../hooks/useCustomDraggable.ts";
+import type { DragEndEvent } from "../hooks/useCustomDraggable.ts";
 
 type DraggableProps = {
   id: string;
   children?: ReactNode;
   startPosition?: { x: number; y: number };
+  //onDragEnd?: (event: DragEndEvent) => void;
 };
 
 export default function Draggable(props: DraggableProps) {
@@ -13,21 +15,18 @@ export default function Draggable(props: DraggableProps) {
     x: (props.startPosition?.x || 0),
     y: (props.startPosition?.y || 0),
   });
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+
+  const onDragEnd = useCallback((event: DragEndEvent) => {
+    setPosition((prev) => ({
+      x: prev.x + event.delta.x,
+      y: prev.y + event.delta.y,
+    }));
+  }, []);
+
+  const { attributes, listeners, setNodeRef, transform } = useCustomDraggable({
     id: props.id,
+    onDragEnd: onDragEnd,
   });
-
-  const [lastTransform, setLastTransform] = useState(transform);
-
-  useEffect(() => {
-    if (lastTransform && (transform === null)) {
-      setPosition((prev) => ({
-        x: prev.x + lastTransform.x,
-        y: prev.y + lastTransform.y,
-      }));
-    }
-    setLastTransform(transform);
-  }, [transform]);
 
   const style = {
     position: "absolute" as const, // Feste Position im Dokument
