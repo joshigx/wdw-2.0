@@ -1,28 +1,42 @@
-import { useEffect, type ReactNode } from "react";
-import { useDroppable, type UniqueIdentifier } from "@dnd-kit/core";
+import { type ReactNode, useEffect } from "react";
+import { type UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 
 type Props = {
   children?: ReactNode;
   id: string;
   className?: string;
-  dropedOverID?: UniqueIdentifier | null | undefined
+  droppedOverID?: UniqueIdentifier | null | undefined;
+  draggedOverID?: UniqueIdentifier | null | undefined;
 };
 
 export default function Droppable(props: Props) {
-  const { isOver, setNodeRef } = useDroppable({
+  //isOver gibt es auch noch
+  const { setNodeRef } = useDroppable({
     id: props.id,
   });
 
-  const style = {
-    color: isOver ? "green" : undefined,
-  };
-
-
-
+  //const [textColor, setTextColor] = useState<string>("undefined")
+  const textColor = props.id === props.draggedOverID ? "green" : "white";
 
   useEffect(() => {
-    console.log("Über mir (" + props.id + ") wurde etwas gedroppt");
-  }, [props.dropedOverID]);
+    if (props.id === props.droppedOverID) {
+      console.log("Über mir (" + props.id + ") wurde etwas gedroppt");
+    }
+  }, [props.droppedOverID]);
+
+  useEffect(() => {
+    if (props.id === props.draggedOverID) {
+      console.log("Über mir (" + props.id + ") wurde etwas gedragged");
+
+      // setTextColor("green")
+    } else {
+      //setTextColor("white")
+    }
+  }, [props.draggedOverID]);
+
+  const style = {
+    color: textColor,
+  };
 
   return (
     <div ref={setNodeRef} style={style} className={props.className}>

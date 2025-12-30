@@ -1,7 +1,7 @@
 import { DragDropProvider } from "@dnd-kit/react";
 import NextDraggable from "./NextDraggable.tsx";
 import NextDroppable from "./NextDroppable.tsx";
-import NextDragDropMonitor from "./NextDragDropMonitor.tsx"
+import NextDragDropMonitor from "./NextDragDropMonitor.tsx";
 import { useState } from "react";
 
 export default function App() {
@@ -9,7 +9,6 @@ export default function App() {
 
   return (
     <DragDropProvider
-
       onDragEnd={(event) => {
         if (event.canceled) return;
 
@@ -18,7 +17,7 @@ export default function App() {
         setIsDropped(target?.id === "droppable");
       }}
     >
-        <NextDragDropMonitor></NextDragDropMonitor>
+      <NextDragDropMonitor></NextDragDropMonitor>
 
       {!isDropped && <NextDraggable />}
 

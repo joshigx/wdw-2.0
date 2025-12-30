@@ -78,11 +78,10 @@ export default function Draggable(props: DraggableProps) {
     props.onDragEnd?.(event);
   }, [snapBack, props.onDragEnd]);
 
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useCustomDraggable({
-      id: props.id,
-      onDragEnd: onDragEnd,
-    });
+  const { attributes, listeners, setNodeRef, transform } = useCustomDraggable({
+    id: props.id,
+    onDragEnd: onDragEnd,
+  });
 
   const style = {
     position: "absolute" as const, // Feste Position im Dokument
