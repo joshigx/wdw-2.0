@@ -14,7 +14,9 @@ import { ClientOnly } from "../components/ClientOnly.tsx";
 import Droppable from "../components/Droppable.tsx";
 import { useState } from "react";
 
-interface Room {
+import calculateGridPosition from "../helpers/calculateGridPosition.ts";
+
+interface _Room {
   id: string;
   users: number[];
 }
@@ -42,11 +44,31 @@ export function loader({}: Route.LoaderArgs) {
 
 export default function Game({ loaderData }: Route.ComponentProps) {
   const users: User[] = loaderData;
-  const startPos = { x: 70, y: 70 };
+
+  const GRID_CONFIG = {
+    columns: 2,
+    cellWidth: 350,
+    cellHeight: 50,
+    margin: 100,
+    offsetX: 200,
+    offsetY: 200
+  };
+
+  const initialPositions: Record<string, { x: number; y: number }> = {};
+
+  users.forEach((user, index) => {
+    initialPositions[user.id] = calculateGridPosition(
+      index,
+      GRID_CONFIG.columns,
+      GRID_CONFIG.cellWidth,
+      GRID_CONFIG.cellHeight,
+      GRID_CONFIG.margin,
+      GRID_CONFIG.offsetX,
+      GRID_CONFIG.offsetY
+    );
+  });
+
   const [dropedOverID, setDroppedOverID] = useState<
-    UniqueIdentifier | null | undefined
-  >(null);
-  const [draggedOverID, setDraggedOverID] = useState<
     UniqueIdentifier | null | undefined
   >(null);
 
@@ -56,12 +78,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   const dragMove = (_e: DragMoveEvent) => {
   };
 
-  const dragOver = (e: DragOverEvent) => {
-    if (e.over?.id) {
-      setDraggedOverID(e.over.id);
-    } else {
-      setDraggedOverID(null);
-    }
+  const dragOver = (_e: DragOverEvent) => {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
@@ -87,22 +104,17 @@ export default function Game({ loaderData }: Route.ComponentProps) {
       >
         {users.map((user: User) => (
           <Draggable
-            startPosition={startPos}
+            startPosition={initialPositions[user.id]}
             key={user.id}
             id={user.id}
             snapBack={false}
-            onDragEnd={(
-              event,
-            ) => (console.log(
-              "Veränderung insgesamt x, y: " + event.deltaSum.x.toFixed(0) +
-                " " + event.deltaSum.y.toFixed(0),
-            ))}
-            className="text-white bg-brand box-border 
-  bg-amber-600 border border-transparent 
-  hover:bg-brand-strong hover:bg-amber-900 
-  focus:ring-4 focus:ring-brand-medium shadow-xs 
-  focus:outline-none
-  font-medium leading-5 rounded-full text-sm px-4 py-2.5 "
+            // onDragEnd={(
+            //   event,
+            // ) => (console.log(
+            //   "Veränderung insgesamt x, y: " + event.deltaSum.x.toFixed(0) +
+            //   " " + event.deltaSum.y.toFixed(0),
+            // ))}
+            className="text-white bg-amber-600 rounded-full px-4 py-2.5"
           >
             Anwort: {user.answer}
           </Draggable>
@@ -111,24 +123,18 @@ export default function Game({ loaderData }: Route.ComponentProps) {
         <Draggable id="123">
           <Droppable
             droppedOverID={dropedOverID}
-            draggedOverID={draggedOverID}
             id="peter"
           >
-            <div className="bg-amber-600">
-              Peter
-            </div>
+            Peter
           </Droppable>
         </Draggable>
 
         <Draggable id="124">
           <Droppable
             droppedOverID={dropedOverID}
-            draggedOverID={draggedOverID}
             id="horst"
           >
-            <div className="bg-amber-600">
-              Horst
-            </div>
+            Horst
           </Droppable>
         </Draggable>
       </DndContext>

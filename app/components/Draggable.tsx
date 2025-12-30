@@ -87,7 +87,10 @@ export default function Draggable(props: DraggableProps) {
     position: "absolute" as const, // Feste Position im Dokument
     left: `${position.x}px`,
     top: `${position.y}px`,
-    transform: `translate3d(${transform?.x || 0}px, ${transform?.y || 0}px, 0)`,
+    //transform: `translate3d(${((transform?.x || 0) + position.x) || 0}px, ${((transform?.y || 0) + position.y) || 0}px, 0)`,
+    transform: `translate3d(${(transform?.x || 0) || 0}px, ${
+      (transform?.y || 0) || 0
+    }px, 0)`,
     touchAction: "none",
   };
 
