@@ -44,7 +44,9 @@ export default function Game({ loaderData }: Route.ComponentProps) {
             key={user.id}
             id={user.id}
             snapBack={false}
-            onDragEnd={(event) => (console.log("Test " + event.delta.x + event.delta.y))}
+            onDragEnd={(event) => (console.log("Veränderung insgesamt x, y: " +event.deltaSum.x.toFixed(0) + " " + event.deltaSum.y.toFixed(0)))}
+
+
             className="text-white bg-brand box-border 
   bg-amber-600 border border-transparent 
   hover:bg-brand-strong hover:bg-amber-900 

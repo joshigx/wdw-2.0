@@ -10,6 +10,7 @@ type DraggableProps = {
   className?: string;
   snapBack?: boolean
   onDragEnd?: (event: DragEndEvent) => void;
+
 };
 
 export default function Draggable(props: DraggableProps) {
@@ -28,6 +29,7 @@ export default function Draggable(props: DraggableProps) {
         x: prev.x + event.delta.x,
         y: prev.y + event.delta.y,
       }));
+
     }
 
     props.onDragEnd?.(event);
