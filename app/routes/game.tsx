@@ -12,9 +12,8 @@ import Draggable from "../components/Draggable.tsx";
 import users from "./api/testUsers.json" with { type: "json" };
 import { ClientOnly } from "../components/ClientOnly.tsx";
 import Droppable from "../components/Droppable.tsx";
-import { useState } from "react";
-
-import calculateGridPosition from "../helpers/calculateGridPosition.ts";
+import { useEffect, useState } from "react";
+import getInitialPositions, {GRID_CONFIG} from "../helpers/calculateGridPosition.ts";
 
 interface _Room {
   id: string;
@@ -28,14 +27,14 @@ interface User {
   answer: string;
 }
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({}: Route.LoaderArgs) {
+export function loader({ }: Route.LoaderArgs) {
   const typedUsers: User[] = users as User[];
   const _lenght = typedUsers.length;
 
@@ -43,48 +42,54 @@ export function loader({}: Route.LoaderArgs) {
 }
 
 export default function Game({ loaderData }: Route.ComponentProps) {
-  const users: User[] = loaderData;
 
-  const GRID_CONFIG = {
-    columns: 2,
-    cellWidth: 350,
-    cellHeight: 50,
-    margin: 100,
-    offsetX: 200,
-    offsetY: 200
-  };
 
-  const initialPositions: Record<string, { x: number; y: number }> = {};
-
-  users.forEach((user, index) => {
-    initialPositions[user.id] = calculateGridPosition(
-      index,
-      GRID_CONFIG.columns,
-      GRID_CONFIG.cellWidth,
-      GRID_CONFIG.cellHeight,
-      GRID_CONFIG.margin,
-      GRID_CONFIG.offsetX,
-      GRID_CONFIG.offsetY
-    );
+  //States
+  const [viewport, setViewport] = useState({
+    width: globalThis.innerWidth,
+    height: globalThis.innerHeight,
   });
 
-  const [dropedOverID, setDroppedOverID] = useState<
-    UniqueIdentifier | null | undefined
-  >(null);
+  const [dropedOverID, setDroppedOverID] = useState<UniqueIdentifier | null>(
+    null,
+  );
 
-  const dragStart = (e: DragStartEvent) => {
+
+  //identifier-Declaration
+  const users: User[] = loaderData;
+  const initialPositions = getInitialPositions(users, viewport);
+
+
+  //Effects
+  useEffect(() => {
+    const handleResize = () => {
+      setViewport({
+        width: globalThis.innerWidth,
+        height: globalThis.innerHeight,
+      });
+      console.log("breite: "+ globalThis.innerWidth + ", höhe " + globalThis.innerHeight);
+      
+    };
+
+    globalThis.addEventListener("resize", handleResize);
+    return () => globalThis.removeEventListener("resize", handleResize);
+  }, []);
+
+
+  //EventHandler-Declaration für DnD-Context
+  const handleDragStart = (e: DragStartEvent) => {
     console.log("ID vom gestareten Element: " + e.active.id);
   };
-  const dragMove = (_e: DragMoveEvent) => {
+  const handleDragMove = (_e: DragMoveEvent) => {
   };
 
-  const dragOver = (_e: DragOverEvent) => {
+  const handleDragOver = (_e: DragOverEvent) => {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
     console.log(
       "Das Draggable: " + e.active.id + " wurde auf " + e.over?.id +
-        " gedroppt",
+      " gedroppt",
     );
 
     if (e.over?.id) {
@@ -97,12 +102,15 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   return (
     <ClientOnly>
       <DndContext
-        onDragStart={dragStart}
-        onDragMove={dragMove}
-        onDragOver={dragOver}
+        onDragStart={handleDragStart}
+        onDragMove={handleDragMove}
+        onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
+        
       >
+        <div>
         {users.map((user: User) => (
+
           <Draggable
             startPosition={initialPositions[user.id]}
             key={user.id}
@@ -114,12 +122,13 @@ export default function Game({ loaderData }: Route.ComponentProps) {
             //   "Veränderung insgesamt x, y: " + event.deltaSum.x.toFixed(0) +
             //   " " + event.deltaSum.y.toFixed(0),
             // ))}
-            className="text-white bg-amber-600 rounded-full px-4 py-2.5"
+            className={`text-black bg-yellow-500 min-h-${Math.floor(GRID_CONFIG.cellHeight/4)} px-4 py-2.5 w-${Math.floor(GRID_CONFIG.cellWidth/4)} text-center  rounded cursor-pointer select-none`}
           >
             Anwort: {user.answer}
           </Draggable>
-        ))}
 
+        ))}
+        </div>
         <Draggable id="123">
           <Droppable
             droppedOverID={dropedOverID}
