@@ -56,7 +56,6 @@ function calculateGridPosition(
   };
 }
 
-
 export default function getInitialPositions(
   users: User[],
   viewport: Viewport,
