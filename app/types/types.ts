@@ -1,3 +1,5 @@
+import type { UniqueIdentifier } from "@dnd-kit/core";
+
 export interface Viewport {
   width: number;
   height: number;
@@ -15,3 +17,9 @@ export interface Room {
   id: string;
   users: number[];
 }
+
+export type loggedAnswer = {
+  droppableZoneId: UniqueIdentifier;
+  answerId: UniqueIdentifier;
+};
+

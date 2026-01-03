@@ -8,9 +8,7 @@ import {
 } from "@dnd-kit/core";
 import type { Route } from "./+types/game.ts";
 import {
-  createSnapModifier,
   restrictToWindowEdges,
-  snapCenterToCursor,
 } from "@dnd-kit/modifiers";
 
 import Draggable from "../components/Draggable.tsx";
@@ -20,13 +18,9 @@ import Droppable from "../components/Droppable.tsx";
 import { useEffect, useState } from "react";
 import getInitialPositions from "../helpers/calculateGridPosition.ts";
 import getInitialDroppablePositions from "../helpers/calculateDroppablePositions.ts";
-import type { User, Viewport } from "../types/types.ts";
+import type { User, Viewport, loggedAnswer } from "../types/types.ts";
 import ControlBar from "../components/ControlBar.tsx";
 
-type loggedAnswer = {
-  droppableZoneId: UniqueIdentifier;
-  answerId: UniqueIdentifier;
-};
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -54,7 +48,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   );
 
   const [loggedAnswers, setLoggedAnswers] = useState<loggedAnswer[]>([]);
-  const [allLoggedIn, setAllLoggedIn] = useState(false);
+  const [answersSubmitted, setAnswersSubmitted] = useState(false);
 
   //speicherrt die Versuche
   const [attempts, setAttempts] = useState(0);
@@ -84,6 +78,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   }, []);
 
   useEffect(() => {
+    setAnswersSubmitted(false)
     console.log(loggedAnswers);
 
     console.log(
@@ -167,10 +162,20 @@ export default function Game({ loaderData }: Route.ComponentProps) {
       console.log("Alles eingeloggt");
 
       setAttempts((s) => s + 1);
+
+      setAnswersSubmitted(true);
+
+
+
+
+
     } else {
       alert(`Du hast noch nicht alle Karten eingeloggt`);
+      setAnswersSubmitted(false)
     }
   }
+
+
   return (
     <div className="">
       <ClientOnly>
@@ -206,6 +211,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
                   droppedOverID={dropedOverID}
                   startPosition={initialDroppablePositions[user.id]}
                   className={` text-black  min-h-25 px-4 py-2.5 w-50 text-center rounded cursor-pointer select-none`}
+                  loggedAnswers={answersSubmitted ? loggedAnswers : null}
                 >
                   {user.name}
                 </Droppable>
