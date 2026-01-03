@@ -1,10 +1,7 @@
-
 export interface Viewport {
   width: number;
   height: number;
 }
-
-
 
 //overwrite later with prisma types, just for testing / develpoment
 export interface User {

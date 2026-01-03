@@ -3,7 +3,7 @@ import {
   controlBarHeight,
   DRAGGABLE_GRID_CONFIG as GRID_CONFIG,
 } from "./config.ts";
-import type { Viewport, User } from "../types/types.ts";
+import type { User, Viewport } from "../types/types.ts";
 
 export type DraggablePositon = Record<string, { x: number; y: number }>;
 
@@ -48,7 +48,7 @@ export default function getInitialPositions(
   viewport: Viewport,
 ): DraggablePositon {
   const viewportWithOffset: Viewport = {
-    height: viewport.height-controlBarHeight,
+    height: viewport.height - controlBarHeight,
     width: viewport.width,
   };
   const initialPositions: DraggablePositon = {};

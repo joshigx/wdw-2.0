@@ -1,8 +1,7 @@
-export const controlBarHeight = 100;
-
+export const controlBarHeight = 150;
 
 export const DRAGGABLE_GRID_CONFIG = {
-  cellWidth: 200,
+  cellWidth: 180,
   cellHeight: 100,
   marginX: 20,
   marginY: 20,

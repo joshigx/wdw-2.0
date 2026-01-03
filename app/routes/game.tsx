@@ -7,7 +7,11 @@ import {
   type UniqueIdentifier,
 } from "@dnd-kit/core";
 import type { Route } from "./+types/game.ts";
-import { createSnapModifier, restrictToWindowEdges, snapCenterToCursor } from '@dnd-kit/modifiers';
+import {
+  createSnapModifier,
+  restrictToWindowEdges,
+  snapCenterToCursor,
+} from "@dnd-kit/modifiers";
 
 import Draggable from "../components/Draggable.tsx";
 import users from "./api/testUsers.json" with { type: "json" };
@@ -16,24 +20,22 @@ import Droppable from "../components/Droppable.tsx";
 import { useEffect, useState } from "react";
 import getInitialPositions from "../helpers/calculateGridPosition.ts";
 import getInitialDroppablePositions from "../helpers/calculateDroppablePositions.ts";
-import type { Viewport, User } from "../types/types.ts";
+import type { User, Viewport } from "../types/types.ts";
 import ControlBar from "../components/ControlBar.tsx";
-
-
 
 type loggedAnswer = {
   droppableZoneId: UniqueIdentifier;
   answerId: UniqueIdentifier;
 };
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({ }: Route.LoaderArgs) {
+export function loader({}: Route.LoaderArgs) {
   const typedUsers: User[] = users as User[];
   const _lenght = typedUsers.length;
 
@@ -81,12 +83,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
     return () => globalThis.removeEventListener("resize", handleResize);
   }, []);
 
-
-
-
-
   useEffect(() => {
-
     console.log(loggedAnswers);
 
     console.log(
@@ -95,11 +92,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
 
     if (loggedAnswers.length === users.length) {
       console.log("Alles eingeloggt");
-
     }
-
-
-
   }, [loggedAnswers]);
 
   //EventHandler-Declaration für DnD-Context
@@ -136,7 +129,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
 
       console.log(
         "Das Draggable: " + e.active.id + " wurde auf " + e.over?.id +
-        " gedroppt",
+          " gedroppt",
       );
     } //wenn das item ins leere gezogen wird
 
@@ -167,26 +160,19 @@ export default function Game({ loaderData }: Route.ComponentProps) {
     }
   };
 
-
   //wird ausgelöst, wenn "Antwort prüfen" gedrückt wurde
   function testAnswers() {
     console.log("Antwort prüfen wurde gedrückt");
     if (loggedAnswers.length === users.length) {
       console.log("Alles eingeloggt");
-      
-      setAttempts(s => s + 1)
 
+      setAttempts((s) => s + 1);
+    } else {
+      alert(`Du hast noch nicht alle Karten eingeloggt`);
     }
-    else {
-      alert(`Du hast noch nicht alle Karten eingeloggt`)
-    }
-
-
-
   }
   return (
-    <div
-      className="">
+    <div className="">
       <ClientOnly>
         <div>
           <DndContext
@@ -203,7 +189,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
                   key={user.id}
                   id={user.id}
                   snapBack={false}
-                  className={`text-black bg-yellow-500 min-h-24 px-4 py-2.5 w-45 text-center  rounded cursor-pointer select-none`}
+                  className={`text-black bg-yellow-500 min-h-24 px-4 py-2.5 w-45 text-center rounded cursor-pointer select-none`}
                   viewport={viewport}
                   positionsOfDroppable={initialDroppablePositions}
                 >
@@ -230,9 +216,10 @@ export default function Game({ loaderData }: Route.ComponentProps) {
 
         <ControlBar
           testAnswers={testAnswers}
-          attempts={attempts}></ControlBar>
+          attempts={attempts}
+        >
+        </ControlBar>
       </ClientOnly>
-
     </div>
   );
 }

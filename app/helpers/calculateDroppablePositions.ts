@@ -13,7 +13,7 @@ interface CardsPerSide {
 
 export type DroppablePositon = Record<
   string,
-  { x: number; y: number; customStyle: string }
+  { x: number; y: number; customStyle: string; side?: number }
 >;
 
 function calculateGridPosition(
@@ -42,6 +42,7 @@ function calculateGridPosition(
         x: baseX - ((cellWidth + margin) / 2),
         y: margin,
         customStyle: "",
+        side: 0,
       };
     }
 
@@ -54,6 +55,7 @@ function calculateGridPosition(
         x: viewport.width - (cellWidth + margin),
         y: baseY - offsetY,
         customStyle: "",
+        side: 1,
       };
     }
     //bottom
@@ -63,7 +65,8 @@ function calculateGridPosition(
       return {
         x: baseX - ((cellWidth + margin) / 2),
         y: viewport.height - (cellHeight + margin),
-        customStyle: `flex items-end justify-center `,
+        customStyle: ` `,
+        side: 2,
       };
     }
     //left
@@ -75,6 +78,7 @@ function calculateGridPosition(
         x: margin,
         y: baseY - offsetY,
         customStyle: "",
+        side: 3,
       };
     }
   }

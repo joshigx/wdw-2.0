@@ -41,7 +41,9 @@ export default function Droppable(props: Props) {
     <div
       ref={droppableObj.setNodeRef}
       style={style}
-      className={`${props.className} ${props.startPosition?.customStyle} ${droppableObj.isOver ? "bg-gray-500" : "bg-gray-300" } `}
+      className={`${props.className} ${props.startPosition?.customStyle} ${
+        droppableObj.isOver ? "bg-gray-500" : "bg-gray-300"
+      } `}
     >
       {props.children}
     </div>
