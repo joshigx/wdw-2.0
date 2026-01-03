@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDraggable, type UseDraggableArguments } from "@dnd-kit/core";
+import type { Viewport } from "../types/types.ts";
 
 /**
  * Represents the event triggered when a drag operation ends.
@@ -31,6 +32,7 @@ export interface DragEndEvent {
  */
 interface CustomDraggableArgs extends UseDraggableArguments {
   onDragEnd?: (event: DragEndEvent) => void;
+  viewport?: Viewport;
 }
 
 /**
@@ -67,6 +69,7 @@ export function useCustomDraggable(
 
   //runs everytime the transform obeject changes (when drag starts, runs or ends)
   useEffect(() => {
+    
     //if draggable is let gone (when the transform object changes back to null and the lastTransform is not null, so a transform already happend),
     if (lastTransform && transform === null) {
       allTransforms.current.x += lastTransform.x;

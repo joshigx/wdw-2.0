@@ -1,7 +1,11 @@
 //import { CSS } from '@dnd-kit/utilities';
-import { type ReactNode, useCallback, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { useCustomDraggable } from "../hooks/useCustomDraggable.ts";
 import type { DragEndEvent } from "../hooks/useCustomDraggable.ts";
+import type { Viewport } from "../types/types.ts";
+import { DRAGGABLE_GRID_CONFIG } from "../helpers/config.ts"
+import type { Transform } from "@dnd-kit/utilities";
+import { useDraggable } from "@dnd-kit/core";
 
 /**
  * Properties for a Draggable component.
@@ -51,6 +55,7 @@ type DraggableProps = {
   className?: string;
   snapBack?: boolean;
   onDragEnd?: (event: DragEndEvent) => void;
+  viewport: Viewport
 };
 
 export default function Draggable(props: DraggableProps) {
@@ -60,6 +65,8 @@ export default function Draggable(props: DraggableProps) {
     y: (props.startPosition?.y || 0),
   });
 
+  const [lastTransform, setLastTransform] = useState<Transform | null>(null)
+
   /**
    * Handles the drag end event and updates the position of the draggable component.
    * If `snapBack` is `false`, the position is updated based on the drag delta.
@@ -67,43 +74,58 @@ export default function Draggable(props: DraggableProps) {
    *
    * @param event - The drag end event containing information about the drag operation.
    */
-  const onDragEnd = useCallback((event: DragEndEvent) => {
+  function onDragEnd(delta: { x: number, y: number }) {
+
     if (snapBack === false) {
       setPosition((prev) => ({
-        x: prev.x + event.delta.x,
-        y: prev.y + event.delta.y,
+        x: prev.x + delta.x,
+        y: prev.y + delta.y,
       }));
     }
+  }
 
-    props.onDragEnd?.(event);
-  }, [snapBack, props.onDragEnd]);
-
-  const draggable = useCustomDraggable({
+  const draggableObj = useDraggable({
     id: props.id,
-    onDragEnd: onDragEnd,
   });
 
   //console.log(draggable.over?.id);
+
+
+  useEffect(() => {
+    if (lastTransform && draggableObj.transform === null) {
+
+      // run onDragEnd Function (provided by the Component which uses this hook as Callback), with the DragEndEvent parameters
+      onDragEnd({
+        x: lastTransform.x,
+        y: lastTransform.y,
+      }
+      );
+    }
+
+
+
+
+    setLastTransform(draggableObj.transform)
+  }, [draggableObj.transform])
 
   const style = {
     position: "absolute" as const, // Feste Position im Dokument
     left: `${position.x}px`,
     top: `${position.y}px`,
     //transform: `translate3d(${((transform?.x || 0) + position.x) || 0}px, ${((transform?.y || 0) + position.y) || 0}px, 0)`,
-    transform: `translate3d(${(draggable.transform?.x || 0) || 0}px, ${
-      (draggable.transform?.y || 0) || 0
-    }px, 0)`,
-    zIndex: draggable.transform ? 1 : 0,
+    transform: `translate3d(${(draggableObj.transform?.x || 0) || 0}px, ${(draggableObj.transform?.y || 0) || 0
+      }px, 0)`,
+    zIndex: draggableObj.transform ? 1 : 0,
     touchAction: "none",
   };
 
   return (
     <div
-      ref={draggable.setNodeRef}
+      ref={draggableObj.setNodeRef}
       style={style}
-      className={props.className}
-      {...draggable.listeners}
-      {...draggable.attributes}
+      className={`${props.className} hover:bg-amber-500`}
+      {...draggableObj.listeners}
+      {...draggableObj.attributes}
     >
       {props.children}
     </div>

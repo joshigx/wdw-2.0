@@ -1,15 +1,9 @@
 import shuffleArray, { createArrayFromNtoM } from "./fisherYatesShuffle.ts";
-import { DRAGGABLE_GRID_CONFIG as GRID_CONFIG } from "./config.ts";
-import type { Viewport } from "../types/types.ts";
-
-
-interface User {
-  id: string;
-  locationId: string;
-  name: string;
-  answer: string;
-}
-
+import {
+  controlBarHeight,
+  DRAGGABLE_GRID_CONFIG as GRID_CONFIG,
+} from "./config.ts";
+import type { Viewport, User } from "../types/types.ts";
 
 export type DraggablePositon = Record<string, { x: number; y: number }>;
 
@@ -53,6 +47,10 @@ export default function getInitialPositions(
   users: User[],
   viewport: Viewport,
 ): DraggablePositon {
+  const viewportWithOffset: Viewport = {
+    height: viewport.height-controlBarHeight,
+    width: viewport.width,
+  };
   const initialPositions: DraggablePositon = {};
   const numberOfUsers = users.length;
   const columns = (numberOfUsers > 5) ? 3 : 2;
@@ -61,7 +59,7 @@ export default function getInitialPositions(
   users.forEach((user, index) => {
     initialPositions[user.id] = calculateGridPosition(
       shuffledArray[index],
-      viewport,
+      viewportWithOffset,
       numberOfUsers,
       columns,
       GRID_CONFIG.cellWidth,

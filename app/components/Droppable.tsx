@@ -13,7 +13,7 @@ type Props = {
 
 export default function Droppable(props: Props) {
   //isOver gibt es auch noch
-  const droppable = useDroppable({
+  const droppableObj = useDroppable({
     id: props.id,
   });
 
@@ -39,9 +39,9 @@ export default function Droppable(props: Props) {
 
   return (
     <div
-      ref={droppable.setNodeRef}
+      ref={droppableObj.setNodeRef}
       style={style}
-      className={`${props.className} ${props.startPosition?.customStyle}`}
+      className={`${props.className} ${props.startPosition?.customStyle} ${droppableObj.isOver ? "bg-gray-500" : "bg-gray-300" } `}
     >
       {props.children}
     </div>

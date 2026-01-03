@@ -1,13 +1,6 @@
-import { DROPPABLE_GRID_CONFIG as GRID_CONFIG } from "./config.ts";
-import type { Viewport } from "../types/types.ts";
+import { DROPPABLE_GRID_CONFIG as GRID_CONFIG, controlBarHeight } from "./config.ts";
+import type { Viewport, User  } from "../types/types.ts";
 
-
-interface User {
-  id: string;
-  locationId: string;
-  name: string;
-  answer: string;
-}
 
 interface CardsPerSide {
   top: number;
@@ -30,6 +23,7 @@ function calculateGridPosition(
   cellHeight: number,
   margin: number = 15,
 ) {
+  //viewport.height=viewport.height-controlBarHeight;
   //berechnet in welchen seite die card kommt (0: oben, 1: rechts, 2: unten, 3: links)
   const side = index % 4;
 
@@ -100,6 +94,10 @@ export default function getInitialDroppablePositions(
 ): DraggablePositon {
   const initialPositions: DraggablePositon = {};
   const numberOfUsers = users.length;
+  const viewportWithOffset: Viewport = {
+    height: viewport.height-controlBarHeight,
+    width: viewport.width,
+  };
 
   //Berechnet die aufteilung auf die vier bildschirm seiten
   const remainder = numberOfUsers % 4;
@@ -114,7 +112,7 @@ export default function getInitialDroppablePositions(
   users.forEach((user, index) => {
     initialPositions[user.id] = calculateGridPosition(
       index,
-      viewport,
+      viewportWithOffset,
       cardsPerSide,
       numberOfUsers,
       GRID_CONFIG.cellWidth,

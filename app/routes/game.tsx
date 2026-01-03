@@ -7,6 +7,7 @@ import {
   type UniqueIdentifier,
 } from "@dnd-kit/core";
 import type { Route } from "./+types/game.ts";
+import { createSnapModifier, restrictToWindowEdges, snapCenterToCursor } from '@dnd-kit/modifiers';
 
 import Draggable from "../components/Draggable.tsx";
 import users from "./api/testUsers.json" with { type: "json" };
@@ -15,33 +16,24 @@ import Droppable from "../components/Droppable.tsx";
 import { useEffect, useState } from "react";
 import getInitialPositions from "../helpers/calculateGridPosition.ts";
 import getInitialDroppablePositions from "../helpers/calculateDroppablePositions.ts";
-import type { Viewport } from "../types/types.ts";
+import type { Viewport, User } from "../types/types.ts";
+import ControlBar from "../components/ControlBar.tsx";
 
-interface _Room {
-  id: string;
-  users: number[];
-}
 
-interface User {
-  id: string;
-  locationId: string;
-  name: string;
-  answer: string;
-}
 
 type loggedAnswer = {
   droppableZoneId: UniqueIdentifier;
   answerId: UniqueIdentifier;
 };
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({}: Route.LoaderArgs) {
+export function loader({ }: Route.LoaderArgs) {
   const typedUsers: User[] = users as User[];
   const _lenght = typedUsers.length;
 
@@ -49,12 +41,10 @@ export function loader({}: Route.LoaderArgs) {
 }
 
 export default function Game({ loaderData }: Route.ComponentProps) {
-  //wie viel vom unteren bildschirm platz gelassen wird für leiste
-  const controlBar = 0;
   //States
   const [viewport, setViewport] = useState<Viewport>({
     width: globalThis.innerWidth,
-    height: globalThis.innerHeight - controlBar,
+    height: globalThis.innerHeight,
   });
 
   const [dropedOverID, setDroppedOverID] = useState<UniqueIdentifier | null>(
@@ -62,6 +52,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   );
 
   const [loggedAnswers, setLoggedAnswers] = useState<loggedAnswer[]>([]);
+  const [allLoggedIn, setAllLoggedIn] = useState(false);
 
   //identifier-Declaration
   const users: User[] = loaderData;
@@ -76,7 +67,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
     const handleResize = () => {
       setViewport({
         width: globalThis.innerWidth,
-        height: globalThis.innerHeight - controlBar,
+        height: globalThis.innerHeight,
       });
       console.log(
         "breite: " + globalThis.innerWidth + ", höhe " + globalThis.innerHeight,
@@ -87,7 +78,9 @@ export default function Game({ loaderData }: Route.ComponentProps) {
     return () => globalThis.removeEventListener("resize", handleResize);
   }, []);
 
+
   useEffect(() => {
+
     console.log(loggedAnswers);
 
     console.log(
@@ -96,7 +89,9 @@ export default function Game({ loaderData }: Route.ComponentProps) {
 
     if (loggedAnswers.length === users.length) {
       console.log("Alles eingeloggt");
+      setAllLoggedIn(true)
     }
+
   }, [loggedAnswers]);
 
   //EventHandler-Declaration für DnD-Context
@@ -133,7 +128,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
 
       console.log(
         "Das Draggable: " + e.active.id + " wurde auf " + e.over?.id +
-          " gedroppt",
+        " gedroppt",
       );
     } //wenn das item ins leere gezogen wird
 
@@ -165,12 +160,16 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   };
 
   return (
+    <div
+    className="">
     <ClientOnly>
+      
       <DndContext
         onDragStart={handleDragStart}
         onDragMove={handleDragMove}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
+        modifiers={[restrictToWindowEdges, snapCenterToCursor]}
       >
         <div>
           {users.map((user: User) => (
@@ -180,6 +179,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
               id={user.id}
               snapBack={false}
               className={`text-black bg-yellow-500 min-h-24 px-4 py-2.5 w-45 text-center  rounded cursor-pointer select-none`}
+            viewport={viewport}
             >
               Anwort: {user.answer}
             </Draggable>
@@ -193,13 +193,17 @@ export default function Game({ loaderData }: Route.ComponentProps) {
               key={user.id}
               droppedOverID={dropedOverID}
               startPosition={initialDroppablePositions[user.id]}
-              className={` text-black bg-gray-200 min-h-25 px-4 py-2.5 w-50 text-center   rounded cursor-pointer select-none`}
+              className={` text-black  min-h-25 px-4 py-2.5 w-50 text-center rounded cursor-pointer select-none`}
             >
               {user.name}
             </Droppable>
           ))}
         </div>
       </DndContext>
+     
+      
     </ClientOnly>
+    <ControlBar></ControlBar>
+     </div>
   );
 }
