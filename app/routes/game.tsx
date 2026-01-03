@@ -169,7 +169,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
         onDragMove={handleDragMove}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
-        modifiers={[restrictToWindowEdges, snapCenterToCursor]}
+        modifiers={[restrictToWindowEdges]}
       >
         <div>
           {users.map((user: User) => (
@@ -201,9 +201,9 @@ export default function Game({ loaderData }: Route.ComponentProps) {
         </div>
       </DndContext>
      
-      
+    <ControlBar></ControlBar>      
     </ClientOnly>
-    <ControlBar></ControlBar>
+
      </div>
   );
 }
