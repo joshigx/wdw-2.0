@@ -12,4 +12,6 @@ export default [
   ]),
   route("app", "./routes/dnd-test.tsx"),
   route("game", "./routes/game.tsx"),
+
+  route("host/lobby/:cuid?", "./routes/lobby.tsx"),
 ] satisfies RouteConfig;
