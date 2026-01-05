@@ -21,12 +21,13 @@ interface ButtonProps {
   bgColor: Color;
   isDisabled?: boolean;
   onClick?: () => void;
+  type: "submit" | "reset" | "button" | undefined
 }
 export default function Button(props: ButtonProps) {
   return (
     <button
       disabled={false}
-      type="button"
+      type={props.type}
       className={`text-white ${colorClasses[props.bgColor]} 
             box-border border border-transparent font-medium leading-5 rounded-full
      text-sm px-4 py-2.5 `}
