@@ -1,5 +1,3 @@
-import type { MouseEventHandler } from "react";
-
 interface LogInButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;

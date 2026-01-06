@@ -4,7 +4,7 @@ import LobbyNotStarted from "../components/lobby/LobbyNotStarted.tsx";
 import LobbyStarted from "../components/lobby/LobbyStarted.tsx";
 import { redirect } from "react-router";
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action() {
   //neuen Raum inder Datenbanmk erstellen
   console.log("startGameButton geclickt");
 

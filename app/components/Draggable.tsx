@@ -8,7 +8,7 @@ import {
 } from "../helpers/config.ts";
 import type { Transform } from "@dnd-kit/utilities";
 import { type Over, useDraggable } from "@dnd-kit/core";
-import getInitialDroppablePositions, {
+import {
   type DroppablePositon,
 } from "../helpers/calculateDroppablePositions.ts";
 

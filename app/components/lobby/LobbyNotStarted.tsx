@@ -1,11 +1,7 @@
 import { Form } from "react-router";
 import Button, { Color } from "../Button.tsx";
 
-interface LobbyNotStartedProps {
-  path?: string;
-}
-
-export default function LobbyNotStarted(props: LobbyNotStartedProps) {
+export default function LobbyNotStarted() {
   const startHostingButton = (
     <Button
       bgColor={Color.GREEN}

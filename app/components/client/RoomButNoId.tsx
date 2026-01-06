@@ -9,16 +9,14 @@ export default function RoomButNoId(props: RoomButNoIdProps) {
 
   return (
     <div>
-      {!roomIsValid ? "ungültiger Raum" : (<div>
-
-
-"gültiger Raum"
-{ 
-//hier User-Erstellungslogik einbauen
-}
-
-
-      </div>)}
+      {!roomIsValid ? "ungültiger Raum" : (
+        <div>
+          "gültiger Raum"
+          {
+            //hier User-Erstellungslogik einbauen
+          }
+        </div>
+      )}
     </div>
   );
 }
