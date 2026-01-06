@@ -14,13 +14,13 @@ export default function ControlBar(props: ControlBarProps) {
     <div className="fixed bottom-2 left-0 right-0 rounded-4xl 
     mx-auto min-h-10 px-3 py-2.5 min-w-180 grid grid-cols-4 place-items-center">
       {props.children}
-      <Button bgColor={Color.BLUE} onClick={props.restartGame}>
+      <Button type="button" bgColor={Color.BLUE} onClick={props.restartGame}>
         Neue Runde Starten
       </Button>
-      <Button bgColor={Color.GREEN} onClick={props.testAnswers}>
+      <Button type="button" bgColor={Color.GREEN} onClick={props.testAnswers}>
         Anworten prüfen
       </Button>
-      <Button bgColor={Color.YELLOW} onClick={props.showAnswers}>
+      <Button type="button" bgColor={Color.YELLOW} onClick={props.showAnswers}>
         Lösungen anzeigen
       </Button>
       <p>

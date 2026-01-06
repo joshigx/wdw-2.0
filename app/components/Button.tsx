@@ -21,7 +21,7 @@ interface ButtonProps {
   bgColor: Color;
   isDisabled?: boolean;
   onClick?: () => void;
-  type: "submit" | "reset" | "button" | undefined
+  type: "submit" | "reset" | "button" | undefined;
 }
 export default function Button(props: ButtonProps) {
   return (

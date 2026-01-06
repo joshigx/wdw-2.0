@@ -33,6 +33,7 @@
     "npm:pg@8.16.3": "8.16.3",
     "npm:postgres@3.4.7": "3.4.7",
     "npm:prisma@7.2.0": "7.2.0_@types+react@19.2.3_react@19.2.3_react-dom@19.2.3__react@19.2.3",
+    "npm:qrcode.react@4.2.0": "4.2.0_react@19.2.3",
     "npm:react-dom@19.2.3": "19.2.3_react@19.2.3",
     "npm:react-router@7.11.0": "7.11.0_react@19.2.3_react-dom@19.2.3__react@19.2.3",
     "npm:react@19.2.3": "19.2.3",
@@ -2522,6 +2523,12 @@
     "pure-rand@6.1.0": {
       "integrity": "sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA=="
     },
+    "qrcode.react@4.2.0_react@19.2.3": {
+      "integrity": "sha512-QpgqWi8rD9DsS9EP3z7BT+5lY5SFhsqGjpgW5DY/i3mK4M9DTBNz3ErMi8BWYEfI3L0d8GIbGmcdFAS1uIRGjA==",
+      "dependencies": [
+        "react"
+      ]
+    },
     "qs@6.14.0": {
       "integrity": "sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==",
       "dependencies": [
@@ -2964,6 +2971,7 @@
       "npm:pg@8.16.3",
       "npm:postgres@3.4.7",
       "npm:prisma@7.2.0",
+      "npm:qrcode.react@4.2.0",
       "npm:react-dom@19.2.3",
       "npm:react-router@7.11.0",
       "npm:react@19.2.3",

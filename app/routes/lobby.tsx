@@ -4,29 +4,19 @@ import LobbyNotStarted from "../components/lobby/LobbyNotStarted.tsx";
 import LobbyStarted from "../components/lobby/LobbyStarted.tsx";
 import { redirect } from "react-router";
 
-
-
 export async function action({ request }: Route.ActionArgs) {
   //neuen Raum inder Datenbanmk erstellen
   console.log("startGameButton geclickt");
 
   const room = await prisma.room.create({
-    data: {
+    data: {},
+  });
 
-
-    }
-
-
-
-  })
-  
   console.log("Raum erstellt:", room);
   return redirect(`/host/lobby/${room.id}`);
 }
 
-
-export function meta({ }: Route.MetaArgs) {
-
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },

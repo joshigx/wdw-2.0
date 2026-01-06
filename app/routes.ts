@@ -14,4 +14,5 @@ export default [
   route("game", "./routes/game.tsx"),
 
   route("host/lobby/:cuid?", "./routes/lobby.tsx"),
+  route("client/:roomId?/:userId?", "./routes/client.tsx"),
 ] satisfies RouteConfig;
