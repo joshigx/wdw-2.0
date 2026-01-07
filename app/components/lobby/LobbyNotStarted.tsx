@@ -36,20 +36,25 @@ export default function LobbyNotStarted() {
           Antwort eingeben könnt. (Vorher überlegt ihr euch offline eine Frage,
           zu der jeder antwortet. Diese Frage braucht ihr hier nirgendwo
           einzugeben.)
-
-          <p>
-            <br></br>
-          </p>
-          <p>
-            Wenn ihr im Spiel seid, ordnet ihr per Drag & Drop die Antworten den
-            jeweiligen Personen zu. Wenn ihr alle eingeloggt habt, könnt ihr
-            euer Ergebnis überprüfen. Leuchten die Karten grün, habt ihr richtig
-            entschieden. Leuchten sie rot, müsst ihr es noch einmal versuchen.
-            Unten rechts seht ihr die Anzahl eurer Versuche. Setzt euch selbst
-            ein Ziel, in wie vielen Versuchen ihr es schaffen wollt.
-          </p>
         </p>
+        <p>
+          <br></br>
+        </p>
+        <p>
+          Wenn ihr im Spiel seid, ordnet ihr per Drag & Drop die Antworten den
+          jeweiligen Personen zu. Wenn ihr alle eingeloggt habt, könnt ihr
+          euer Ergebnis überprüfen. Leuchten die Karten grün, habt ihr richtig
+          entschieden. Leuchten sie rot, müsst ihr es noch einmal versuchen.
+          Unten rechts seht ihr die Anzahl eurer Versuche. Setzt euch selbst
+          ein Ziel, in wie vielen Versuchen ihr es schaffen wollt.
+        </p>
+         <p>
+          <br></br>
+        </p>
+
+        <a className="text-blue-800" href="/host/game">Hier gibt es eine kleinen Demo</a>
+
       </div>
-    </div>
+    </div >
   );
 }
