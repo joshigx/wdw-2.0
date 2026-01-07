@@ -22,6 +22,10 @@ export default function LobbyNotStarted() {
 
       <div className="text-black mt-10 bg-blue-50 min-h-24 px-5 pt-5 pb-8 w-100 text-center rounded-4xl">
         <p>Erklärung:</p>
+        <p>In diesem Spiel geht es darum, als Gruppe zuzuordnen, welche Antwort auf eine Frage, wohl von wem stammen mag
+          oder wie jeder von euch auf eine bestimmte Situation reagieren würde usw. Die Möglichkeiten sind unbegrenzt. 
+          Denkt euch etwas au und dann ratet los
+        </p>
         <p>
           Ihr braucht ein Gerät mit großem Bildschirm (z.b. ein Tablet oder ein
           Laptop), auf dem öffnet ihr diese Seite. Ihr startet das Spiel und

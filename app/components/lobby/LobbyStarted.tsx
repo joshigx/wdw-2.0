@@ -13,7 +13,7 @@ export default function LobbyStarted(props: LobbyStartedProps) {
   return (
     <div className="grid place-items-center gap-4">
       <p>
-        Scannt den QR-Codes mit euren Smartphones um eure Anworten zu senden
+        Scannt den QR-Code mit euren Smartphones um eure Anworten zu senden
       </p>
       <QRCodeSVG
         className="m-5"
@@ -23,7 +23,7 @@ export default function LobbyStarted(props: LobbyStartedProps) {
         marginSize={4}
       />
 
-      Alternativ öffnet auf erurem Smartphone folgenden Link:{" "}
+      Alternativ öffnet auf eurem Smartphone folgenden Link:{" "}
       <a href={`${props.origin}/client/${props.id}`}>
         {`${props.origin}/client/${props.id}`}
       </a>
