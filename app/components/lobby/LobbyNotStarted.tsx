@@ -32,7 +32,7 @@ export default function LobbyNotStarted() {
           <br></br>
         </p>
         <p>
-          Ihr braucht ein Gerät mit großem Bildschirm (z. B. ein Tablet oder
+          Ihr braucht ein Gerät mit großem Bildschirm (z.B. ein Tablet oder
           einen Laptop). Auf diesem öffnet ihr diese Seite. Ihr startet das
           Spiel und scannt dann mit euren Smartphones den QR-Code. So gelangt
           ihr zu einer Seite, auf der ihr euren Namen und anschließend eure
