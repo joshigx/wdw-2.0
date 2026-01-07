@@ -1,4 +1,5 @@
 import type { UniqueIdentifier } from "@dnd-kit/core";
+export type { UserModel as User } from "../generated/prisma/models/User.ts";
 
 export interface Viewport {
   width: number;
@@ -6,17 +7,6 @@ export interface Viewport {
 }
 
 //overwrite later with prisma types, just for testing / develpoment
-export interface User {
-  id: string;
-  locationId: string;
-  name: string;
-  answer: string;
-}
-
-export interface Room {
-  id: string;
-  users: number[];
-}
 
 export type loggedAnswer = {
   droppableZoneId: UniqueIdentifier;

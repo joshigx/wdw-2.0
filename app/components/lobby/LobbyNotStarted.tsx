@@ -13,6 +13,7 @@ export default function LobbyNotStarted() {
 
   return (
     <Form method="post">
+      <input type="hidden" name="intent" value="startGame"></input>
       <div>
         {startHostingButton}
       </div>

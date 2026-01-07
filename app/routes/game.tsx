@@ -8,7 +8,7 @@ import {
 } from "@dnd-kit/core";
 import type { Route } from "./+types/game.ts";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-
+import prisma from "../lib/prisma.ts";
 import Draggable from "../components/Draggable.tsx";
 import users from "./api/testUsers.json" with { type: "json" };
 import { ClientOnly } from "../components/ClientOnly.tsx";
@@ -16,19 +16,45 @@ import Droppable from "../components/Droppable.tsx";
 import { useEffect, useState } from "react";
 import getInitialPositions from "../helpers/calculateGridPosition.ts";
 import getInitialDroppablePositions from "../helpers/calculateDroppablePositions.ts";
-import type { loggedAnswer, User, Viewport } from "../types/types.ts";
+import type { loggedAnswer, Viewport } from "../types/types.ts";
 import ControlBar from "../components/ControlBar.tsx";
 import { onDragEnd } from "../helpers/onDragEnd.ts";
+import type { UserModel } from "../generated/prisma/models/User.ts";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({}: Route.LoaderArgs) {
-  const typedUsers: User[] = users as User[];
+export async function loader(props: Route.LoaderArgs) {
+  let typedUsers: UserModel[] | null = null;
+
+
+  //wenn nicht die Demo version läuft, sonder das richtige spiel mit raum id
+  if (props.params.cuid) {
+
+    const roomId = props.params.cuid;
+    typedUsers = await prisma.user.findMany({
+      where: {
+        locationId: roomId,
+        answer: { not: null },
+      },
+    });
+
+
+  }
+
+  else {
+
+    typedUsers = users as UserModel[];
+
+  }
+
+
+
+
   const _lenght = typedUsers.length;
 
   return typedUsers;
@@ -59,7 +85,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   const [attempts, setAttempts] = useState(0);
 
   //identifier-Declaration
-  const users: User[] = loaderData;
+  const users: UserModel[] = loaderData;
 
   //lädt / berechnet die initialen positionen der draggables und droppables
   const initialPositions = getInitialPositions(users, viewport);
@@ -196,7 +222,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
             modifiers={[restrictToWindowEdges]}
           >
             <div>
-              {users.map((user: User) => (
+              {users.map((user: UserModel) => (
                 <Draggable
                   startPosition={initialPositions[user.id]}
                   key={user.id}
@@ -212,7 +238,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
             </div>
 
             <div>
-              {users.map((user: User) => (
+              {users.map((user: UserModel) => (
                 <Droppable
                   id={user.id}
                   key={user.id}

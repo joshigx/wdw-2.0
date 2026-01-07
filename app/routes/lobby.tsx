@@ -6,16 +6,37 @@ import { redirect, useRevalidator } from "react-router";
 import type { UserModel } from "../generated/prisma/models/User.ts";
 import { useEffect, useState } from "react";
 
-export async function action() {
+export async function action({
+  request,
+  params,
+}: Route.ActionArgs) {
+
+
+
+  const formData: FormData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "startRound") {
+     console.log("startRoundButton geclickt");
+
+     return redirect(`/host/game/${params.cuid}`);
+
+  }
+
+  else if (intent === "startGame") {
+    console.log("startGameButton geclickt");
+
+    const room = await prisma.room.create({
+      data: {},
+    });
+
+    console.log("Raum erstellt:", room);
+    return redirect(`/host/lobby/${room.id}`);
+
+
+  }
   //neuen Raum inder Datenbanmk erstellen
-  console.log("startGameButton geclickt");
 
-  const room = await prisma.room.create({
-    data: {},
-  });
-
-  console.log("Raum erstellt:", room);
-  return redirect(`/host/lobby/${room.id}`);
 }
 
 export function meta({ }: Route.MetaArgs) {
@@ -56,11 +77,9 @@ export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
 }
 clientLoader.hydrate = true;
 
-
 export function HydrateFallback() {
   return <div>Loading...</div>;
 }
-
 
 export default function Lobby(props: Route.ComponentProps) {
   const { roomId: roomId, users, origin } = props.loaderData;
@@ -69,9 +88,7 @@ export default function Lobby(props: Route.ComponentProps) {
 
   const revalidator = useRevalidator();
 
-
   useEffect(() => {
-
     // Alle 3 Sekunden Daten neu laden
     const interval = setInterval(() => {
       revalidator.revalidate();
@@ -79,7 +96,6 @@ export default function Lobby(props: Route.ComponentProps) {
 
     // Cleanup beim Unmount
     return () => clearInterval(interval);
-
   }, []);
 
   return (
