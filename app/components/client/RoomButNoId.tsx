@@ -16,20 +16,20 @@ export default function RoomButNoId(props: RoomButNoIdProps) {
           {props.room?.isRunning
             ? "Spiel läuft gerade, warte bis es zu Ende ist"
             : (
-              <div className="pl-10 mt-10 grid place-items-center gap-4">
-
-                <p >Gib deinen Namen ein: </p>
+              <div className="mt-10 grid place-items-center gap-4">
+                <p>Gib deinen Namen ein:</p>
                 <Form method="post" className="grid place-items-center gap-5">
                   <input type="hidden" name="intent" value="submitUserName" />
                   <input
-                    className="bg-amber-200 mr-5 rounded-full text-black"
+                    className="p-3 bg-white rounded-full text-black"
                     type="text"
                     name="userName"
                   />
 
-                  <Button bgColor={Color.GREEN} type="submit">Raum beitreten</Button>
+                  <Button bgColor={Color.GREEN} type="submit">
+                    Raum beitreten
+                  </Button>
                 </Form>
-
               </div>
             )}
           {

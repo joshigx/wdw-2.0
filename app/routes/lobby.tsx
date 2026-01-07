@@ -9,9 +9,6 @@ export async function action({
   request,
   params,
 }: Route.ActionArgs) {
-
-
-
   const formData: FormData = await request.formData();
   const intent = formData.get("intent");
 
@@ -23,14 +20,11 @@ export async function action({
       },
       data: {
         isRunning: true,
-      }
-    })
+      },
+    });
 
     return redirect(`/host/game/${params.cuid}`);
-
-  }
-
-  else if (intent === "startGame") {
+  } else if (intent === "startGame") {
     console.log("startGameButton geclickt");
 
     const room = await prisma.room.create({
@@ -39,14 +33,11 @@ export async function action({
 
     console.log("Raum erstellt:", room);
     return redirect(`/host/lobby/${room.id}`);
-
-
   }
   //neuen Raum inder Datenbanmk erstellen
-
 }
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -106,7 +97,7 @@ export default function Lobby(props: Route.ComponentProps) {
   }, []);
 
   return (
-    <div className="pl-10 mt-10 grid place-items-center gap-4">
+    <div className="pl-10 mt-15 grid place-items-center gap-4">
       <h1>Willkommen in der Lobby</h1>
       {(!roomId) ? <LobbyNotStarted></LobbyNotStarted> : (
         <LobbyStarted

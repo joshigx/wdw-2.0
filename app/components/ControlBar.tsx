@@ -25,7 +25,8 @@ export default function ControlBar(props: ControlBarProps) {
         Anworten prüfen
       </Button>
       <p>
-        Ihr habt bisher {props.attempts} {(props.attempts === 1) ? "Versuch" : "Versuche"} gebraucht
+        Ihr habt bisher {props.attempts}{" "}
+        {(props.attempts === 1) ? "Versuch" : "Versuche"} gebraucht
       </p>
     </div>
   );

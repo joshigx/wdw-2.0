@@ -1,10 +1,7 @@
 import type { Route } from "../../.react-router/types/app/routes/+types/home.ts";
 //import type { User } from "../generated/prisma/client.ts";
-import type { UserModel as User } from "../generated/prisma/models/User.ts";
-import { createPrismaClient } from "../lib/prisma.server.ts";
-import type { PrismaClient } from "../generated/prisma/client.ts";
-import Title from "../components/title.tsx";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
+import Footer from "../components/footer.tsx";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -28,18 +25,21 @@ export async function loader({}: Route.LoaderArgs) {
   // }
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center -mt-16">
-      <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
-        Willkommen auf josua-lucas.de
-      </h1>
-      <nav>
-      <Link to="/host/lobby" className="bg-emerald-800 p-4  text-orange-100 rounded-full">
-        Zum 'wer-denkt-was'-Spiel
-      </Link>
-
-    </nav>
-    </div>
+    <>
+      <div className="flex flex-col items-center justify-center mt-25">
+        <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
+          Willkommen auf josua-lucas.de
+        </h1>
+        <Link
+          to="/host/lobby"
+          className="bg-emerald-800 p-4  text-orange-100 rounded-full"
+        >
+          Zum 'wer-denkt-was'-Spiel
+        </Link>
+      </div>
+      <Footer></Footer>
+    </>
   );
 }

@@ -7,7 +7,6 @@ export default function HeaderFooter() {
     <div>
       <Header />
       <Outlet />
-
       <Footer />
     </div>
   );

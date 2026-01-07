@@ -1,5 +1,4 @@
 import { QRCodeSVG } from "qrcode.react";
-import { ClientOnly } from "../ClientOnly.tsx";
 import { Form } from "react-router";
 import Button, { Color } from "../Button.tsx";
 interface LobbyStartedProps {
@@ -12,41 +11,44 @@ interface LobbyStartedProps {
 
 export default function LobbyStarted(props: LobbyStartedProps) {
   return (
-    <>
-      <div>
-        Die Lobby wurde mit folgender id gestartet: {props.id}
-        <QRCodeSVG
-          value={`${props.origin}/client/${props.id}`}
-          size={256}
-          level="H"
-          marginSize={4}
-        />
+    <div className="grid place-items-center gap-4">
+      <p>
+        Scannt den QR-Codes mit euren Smartphones um eure Anworten zu senden
+      </p>
+      <QRCodeSVG
+        className="m-5"
+        value={`${props.origin}/client/${props.id}`}
+        size={256}
+        level="H"
+        marginSize={4}
+      />
 
-        Link: {`${props.origin}/client/${props.id}`}
-      </div>
+      Alternativ öffnet auf erurem Smartphone folgenden Link:{" "}
+      <a href={`${props.origin}/client/${props.id}`}>
+        {`${props.origin}/client/${props.id}`}
+      </a>
 
+      <p>
+        Wenn ihr alle eure Antworten eingegeben habt, klickt auf den Knopf um
+        loszulegen!
+      </p>
+      <Form method="post">
+        <input type="hidden" name="intent" value="startRound"></input>
+        <Button
+          bgColor={Color.GREEN}
+          onClick={() => (console.log("Ich wurde gedrückt"))}
+          type="submit"
+        >
+          Runde starten
+        </Button>
+      </Form>
 
-      <div>
-        Spiel starten:
-        <Form method="post">
-          <input type="hidden" name="intent" value="startRound"></input>
-          <Button
-            bgColor={Color.GREEN}
-            onClick={() => (console.log("Ich wurde gedrückt"))}
-            type="submit"
-          >
-            Runde starten
-          </Button>
-        </Form>
-      </div>
-      <div>
-        <p>Folgende Nutzer haben ihre antwort abgeschickt</p>
-        {props.loggedUser.map((user: { name: string }) => (
-          <p>
-            {user.name}
-          </p>
-        ))}
-      </div>
-    </>
+      <p>Folgende Nutzer haben ihre Antwort bereits gesendet:</p>
+      {props.loggedUser.map((user: { name: string }) => (
+        <p>
+          {user.name}
+        </p>
+      ))}
+    </div>
   );
 }

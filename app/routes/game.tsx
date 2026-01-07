@@ -22,28 +22,21 @@ import { onDragEnd } from "../helpers/onDragEnd.ts";
 import type { UserModel } from "../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-
-
 export async function action({
   request,
   params,
 }: Route.ActionArgs) {
-
-
-
   const formData: FormData = await request.formData();
   const intent = formData.get("intent");
 
   if (intent === "startNewRound") {
-
-
     console.log("StartNewRound BUtton pressed");
     const roomId = params.cuid;
 
@@ -62,25 +55,18 @@ export async function action({
       },
       data: {
         isRunning: false,
-      }
+      },
     });
-
-
-
 
     return redirect(`/host/lobby/${params.cuid}`);
   }
-
 }
-
 
 export async function loader(props: Route.LoaderArgs) {
   let typedUsers: UserModel[] | null = null;
 
-
   //wenn nicht die Demo version läuft, sonder das richtige spiel mit raum id
   if (props.params.cuid) {
-
     const roomId = props.params.cuid;
     typedUsers = await prisma.user.findMany({
       where: {
@@ -88,18 +74,9 @@ export async function loader(props: Route.LoaderArgs) {
         answer: { not: null },
       },
     });
-
-
-  }
-
-  else {
-
+  } else {
     typedUsers = users as UserModel[];
-
   }
-
-
-
 
   const _lenght = typedUsers.length;
 

@@ -8,7 +8,7 @@ import type { UserModel } from "../generated/prisma/models.ts";
 import { Form, redirect } from "react-router";
 import Button, { Color } from "../components/Button.tsx";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -24,7 +24,6 @@ export async function action({
   const formData: FormData = await request.formData();
   const intent = formData.get("intent");
   let hasAnsweredSuccesful: boolean = false;
-  let alreadyAnswered: boolean = false;
 
   if (intent === "submitAnswer") {
     //submit answer code
@@ -51,7 +50,7 @@ export async function action({
 
     console.log(
       "die antwort die gerade für diesen nutzer in der datenbank gespeichert ist: " +
-      user?.answer,
+        user?.answer,
     );
 
     if (user?.answer || room?.isRunning) {
@@ -77,7 +76,7 @@ export async function action({
 
       console.log(
         "Anwort abgeschickt: " + updatedUser.answer + " von Nutzer: " +
-        updatedUser.name,
+          updatedUser.name,
       );
       hasAnsweredSuccesful = true;
       return ({ hasAnsweredSuccesful });
@@ -140,12 +139,12 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
   const userId = loaderData.props.params.userId;
 
   const LobbyAndId = (
-    <div className="m-20 pl-10 mt-10 grid place-items-center gap-4">
-      "Gib dein Wort hier ein"
+    <div className="mt-10 grid place-items-center gap-4">
+      Gib deine Antwort hier ein:
       <Form method="post" className="grid place-items-center gap-4">
         <input type="hidden" name="intent" value="submitAnswer"></input>
         <input
-          className="bg-white border-2 m-5 border-amber-400 rounded-full text-black"
+          className="p-3 bg-white rounded-full text-black"
           type="text"
           name="userAnswer"
         />
@@ -155,7 +154,7 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
           onClick={() => (console.log("Ich wurde gedrückt"))}
           type="submit"
         >
-          Submit
+          Antwort senden
         </Button>
       </Form>
     </div>
@@ -170,12 +169,15 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
           : (!hasAnswered
             ? LobbyAndId
             : (
-            <div
-            className="m-5 grid place-items-center">
-            <p>Lade diese Seite neu, wenn ihr mit der Runde fertig seid, dann kannst du eine neue Antwort eingeben</p>
-            <p>Du darfst deinen Bildschirm auch ausschalten.</p> 
-            <p>Deine aktuelle Antwort ist: {loaderData.user?.answer}</p>
-              </div>)))}
+              <div className="m-5 mt-10 grid place-items-center">
+                <p>
+                  Lade diese Seite neu, wenn ihr mit der Runde fertig seid, dann
+                  kannst du eine neue Antwort eingeben
+                </p>
+                <p>Du darfst deinen Bildschirm auch ausschalten.</p>
+                <p>Deine aktuelle Antwort ist: {loaderData.user?.answer}</p>
+              </div>
+            )))}
     </div>
   );
 }
