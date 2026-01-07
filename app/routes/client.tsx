@@ -8,7 +8,7 @@ import type { UserModel } from "../generated/prisma/models.ts";
 import { Form, redirect } from "react-router";
 import Button, { Color } from "../components/Button.tsx";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -20,9 +20,11 @@ export async function action({
   params,
 }: Route.ActionArgs) {
   let user: UserModel | null = null;
+  let room: RoomModel | null = null;
   const formData: FormData = await request.formData();
   const intent = formData.get("intent");
-  let hasAnswered: boolean = false;
+  let hasAnsweredSuccesful: boolean = false;
+  let alreadyAnswered: boolean = false;
 
   if (intent === "submitAnswer") {
     //submit answer code
@@ -30,22 +32,56 @@ export async function action({
     const answer = formData.get("userAnswer") as string || "";
     //Todo: überprüfen, ob der Nutzer bereits eine Antwort gesendet hat, durch Datenbank abfrage
     //wenn runde von host neu gestarete wird, werden alle alten gelöscht und es darf wieder gesendet werden
-    const updatedUser = await prisma.user.update({
-      where: {
-        id: params.userId,
+
+    room = await prisma.room.findUnique(
+      {
+        where: {
+          id: params.roomId,
+        },
       },
-      data: {
-        answer: answer,
+    );
+
+    user = await prisma.user.findUnique(
+      {
+        where: {
+          id: params.userId,
+        },
       },
-    });
+    );
 
-    console.log("Anwort abgeschickt: " + updatedUser.answer + " von Nutzer: " + updatedUser.name);
-    hasAnswered = true;
-    return ({ isSend: hasAnswered })
+    console.log(
+      "die antwort die gerade für diesen nutzer in der datenbank gespeichert ist: " +
+        user?.answer,
+    );
 
+    if (user?.answer || room?.isRunning) {
+      //Fehlerüberprufung einabuen: wenn das spiel gerade läuft oder der nutzer bereits seine antwort abgesendet hat
+      console.log("Fehler antwort breits gesendet doer spiel läuft gerade");
 
+      if (user?.answer) {
+        //Du hast schon eine Antwort gesendet
+      }
 
+      if (room?.isRunning) {
+        //Das Spiel läuft gerade noch
+      }
+    } else {
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: params.userId,
+        },
+        data: {
+          answer: answer,
+        },
+      });
 
+      console.log(
+        "Anwort abgeschickt: " + updatedUser.answer + " von Nutzer: " +
+          updatedUser.name,
+      );
+      hasAnsweredSuccesful = true;
+      return ({ hasAnsweredSuccesful });
+    }
   } else if (intent === "submitUserName") {
     //submit username code
     const name = formData.get("userName") as string || "";
@@ -63,12 +99,11 @@ export async function action({
     console.log("User angelegt: " + user);
     return redirect(`/client/${params.roomId}/${user?.id}`);
   }
-
-
 }
 
 export async function loader(props: Route.LoaderArgs) {
   let room: RoomModel | null = null;
+  let user: UserModel | null = null;
 
   if (props.params.roomId) {
     room = await prisma.room.findUnique({
@@ -78,31 +113,31 @@ export async function loader(props: Route.LoaderArgs) {
     });
   }
 
-  return { props, room };
+  if (props.params.userId) {
+    user = await prisma.user.findUnique(
+      {
+        where: {
+          id: props.params.userId,
+        },
+      },
+    );
+  }
+
+  return { props, room, user };
 }
 
 export default function Home({ loaderData, actionData }: Route.ComponentProps) {
   const [roomObject, _setRoomObect] = useState(loaderData.room);
-  const [hasAnswered, setHasAnswered] = useState(false);
-
+  const [hasAnswered, setHasAnswered] = useState(!!loaderData.user?.answer);
 
   useEffect(() => {
-
-    if (actionData && actionData.isSend) {
-      setHasAnswered(actionData.isSend)
-
+    if (actionData && actionData.hasAnsweredSuccesful) {
+      setHasAnswered(actionData.hasAnsweredSuccesful);
     }
-
-    else {
-      setHasAnswered(false)
-    }
-
-
-  }, [actionData])
+  }, [actionData]);
 
   const roomIdParam = loaderData.props.params.roomId;
   const userId = loaderData.props.params.userId;
-
 
   const LobbyAndId = (
     <div className="m-20">
@@ -115,7 +150,13 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
           name="userAnswer"
         />
 
-        <Button bgColor={Color.GREEN} type="submit">Submit</Button>
+        <Button
+          bgColor={Color.GREEN}
+          onClick={() => (console.log("Ich wurde gedrückt"))}
+          type="submit"
+        >
+          Submit
+        </Button>
       </Form>
     </div>
   );
@@ -126,8 +167,10 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
         ? <NoRoomYet />
         : ((roomIdParam && !userId)
           ? <RoomButNoId room={roomObject} />
-          : (!hasAnswered ? LobbyAndId : " Danke für deine Anwort"))}
+          : (!hasAnswered
+            ? LobbyAndId
+            : "Lade diese Seite neu, wenn ihr mit dem Spiel fertig sein. Seine Antwort ist: " +
+              loaderData.user?.answer))}
     </div>
   );
 }
-
