@@ -28,6 +28,9 @@ export default function LobbyNotStarted() {
           eine bestimmte Situation reagieren würde usw. Die Möglichkeiten sind
           unbegrenzt. Denkt euch etwas aus und dann ratet los
         </p>
+         <p>
+          <br></br>
+        </p>
         <p>
           Ihr braucht ein Gerät mit großem Bildschirm (z. B. ein Tablet oder
           einen Laptop). Auf diesem öffnet ihr diese Seite. Ihr startet das
