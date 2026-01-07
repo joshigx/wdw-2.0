@@ -20,6 +20,7 @@ import type { loggedAnswer, Viewport } from "../types/types.ts";
 import ControlBar from "../components/ControlBar.tsx";
 import { onDragEnd } from "../helpers/onDragEnd.ts";
 import type { UserModel } from "../generated/prisma/models/User.ts";
+import { redirect } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -27,6 +28,51 @@ export function meta({ }: Route.MetaArgs) {
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
+
+
+
+export async function action({
+  request,
+  params,
+}: Route.ActionArgs) {
+
+
+
+  const formData: FormData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "startNewRound") {
+
+
+    console.log("StartNewRound BUtton pressed");
+    const roomId = params.cuid;
+
+    const _updateUsers = await prisma.user.updateMany({
+      where: {
+        locationId: roomId, // Filtert nach locationId
+      },
+      data: {
+        answer: null, // Setzt answer auf null
+      },
+    });
+
+    const _updateRoom = await prisma.room.update({
+      where: {
+        id: params.cuid,
+      },
+      data: {
+        isRunning: false,
+      }
+    });
+
+
+
+
+    return redirect(`/host/lobby/${params.cuid}`);
+  }
+
+}
+
 
 export async function loader(props: Route.LoaderArgs) {
   let typedUsers: UserModel[] | null = null;

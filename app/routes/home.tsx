@@ -4,44 +4,42 @@ import type { UserModel as User } from "../generated/prisma/models/User.ts";
 import { createPrismaClient } from "../lib/prisma.server.ts";
 import type { PrismaClient } from "../generated/prisma/client.ts";
 import Title from "../components/title.tsx";
+import { Link, NavLink } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Josuas Website" },
+    { name: "description", content: "Welcome to Josuas Website!" },
   ];
 }
 
 export async function loader({}: Route.LoaderArgs) {
-  const prisma: PrismaClient = createPrismaClient();
-  try {
-    const users: User[] = await prisma.user.findMany({
-      where: {
-        name: "Tim Schubert",
-      },
-    });
+  // const prisma: PrismaClient = createPrismaClient();
+  // try {
+  //   const users: User[] = await prisma.user.findMany({
+  //     where: {
+  //       name: "Tim Schubert",
+  //     },
+  //   });
 
-    return { users: users };
-  } finally {
-    await prisma.$disconnect();
-  }
+  //   return { users: users };
+  // } finally {
+  //   await prisma.$disconnect();
+  // }
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { users } = loaderData;
   return (
     <div className="min-h-screen flex flex-col items-center justify-center -mt-16">
-      <Title title="Test Title" />
       <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
-        Superblog
+        Willkommen auf josua-lucas.de
       </h1>
-      <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)]">
-        {users.map((user: User) => (
-          <li key={user.id} className="mb-2">
-            {user.name}
-          </li>
-        ))}
-      </ol>
+      <nav>
+      <Link to="/host/lobby" className="bg-emerald-800 p-4  text-orange-100 rounded-full">
+        Zum 'wer-denkt-was'-Spiel
+      </Link>
+
+    </nav>
     </div>
   );
 }

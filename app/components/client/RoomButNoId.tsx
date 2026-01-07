@@ -13,22 +13,23 @@ export default function RoomButNoId(props: RoomButNoIdProps) {
     <div>
       {!roomIsValid ? "ungültiger Raum" : (
         <div>
-          <p>"gültiger Raum"</p>
           {props.room?.isRunning
             ? "Spiel läuft gerade, warte bis es zu Ende ist"
             : (
-              <div>
-                <Form method="post">
-                  <input type="hidden" name="intent" value="submitUserName">
-                  </input>
+              <div className="pl-10 mt-10 grid place-items-center gap-4">
+
+                <p >Gib deinen Namen ein: </p>
+                <Form method="post" className="grid place-items-center gap-5">
+                  <input type="hidden" name="intent" value="submitUserName" />
                   <input
-                    className="bg-amber-200 text-black"
+                    className="bg-amber-200 mr-5 rounded-full text-black"
                     type="text"
                     name="userName"
                   />
 
-                  <Button bgColor={Color.GREEN} type="submit">Submit</Button>
+                  <Button bgColor={Color.GREEN} type="submit">Raum beitreten</Button>
                 </Form>
+
               </div>
             )}
           {

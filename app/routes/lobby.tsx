@@ -3,8 +3,7 @@ import prisma from "../lib/prisma.ts";
 import LobbyNotStarted from "../components/lobby/LobbyNotStarted.tsx";
 import LobbyStarted from "../components/lobby/LobbyStarted.tsx";
 import { redirect, useRevalidator } from "react-router";
-import type { UserModel } from "../generated/prisma/models/User.ts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export async function action({
   request,
@@ -17,9 +16,17 @@ export async function action({
   const intent = formData.get("intent");
 
   if (intent === "startRound") {
-     console.log("startRoundButton geclickt");
+    console.log("startRoundButton geclickt");
+    const _updateRoom = await prisma.room.update({
+      where: {
+        id: params.cuid,
+      },
+      data: {
+        isRunning: true,
+      }
+    })
 
-     return redirect(`/host/game/${params.cuid}`);
+    return redirect(`/host/game/${params.cuid}`);
 
   }
 
@@ -99,8 +106,8 @@ export default function Lobby(props: Route.ComponentProps) {
   }, []);
 
   return (
-    <>
-      <h1>Lobby</h1>
+    <div className="pl-10 mt-10 grid place-items-center gap-4">
+      <h1>Willkommen in der Lobby</h1>
       {(!roomId) ? <LobbyNotStarted></LobbyNotStarted> : (
         <LobbyStarted
           id={roomId}
@@ -108,6 +115,6 @@ export default function Lobby(props: Route.ComponentProps) {
           origin={origin}
         />
       )}
-    </>
+    </div>
   );
 }
