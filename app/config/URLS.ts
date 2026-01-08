@@ -1,4 +1,4 @@
-export const ROUTES = {
+export const PATH = {
   HOME: "/",
   LOBBY: "lobby",
   GAME: "game",

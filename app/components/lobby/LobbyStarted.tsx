@@ -1,7 +1,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import { Form } from "react-router";
 import Button, { Color } from "../Button.tsx";
-import { ROUTES } from "../../config/URLS.ts";
+import { PATH } from "../../config/URLS.ts";
 interface LobbyStartedProps {
   id: string;
   origin?: string;
@@ -18,15 +18,15 @@ export default function LobbyStarted(props: LobbyStartedProps) {
       </p>
       <QRCodeSVG
         className="m-5"
-        value={`${props.origin}/${ROUTES.CLIENT}/${props.id}`}
+        value={`${props.origin}/${PATH.CLIENT}/${props.id}`}
         size={256}
         level="H"
         marginSize={4}
       />
 
       Alternativ öffnet auf eurem Smartphone folgenden Link:{" "}
-      <a href={`${props.origin}/${ROUTES.CLIENT}/${props.id}`}>
-        {`${props.origin}/${ROUTES.CLIENT}/${props.id}`}
+      <a href={`${props.origin}/${PATH.CLIENT}/${props.id}`}>
+        {`${props.origin}/${PATH.CLIENT}/${props.id}`}
       </a>
 
       <p>

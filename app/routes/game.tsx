@@ -23,9 +23,9 @@ import type { UserModel } from "../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
 import routes from "../routes.ts";
 import type { RouteConfigEntry } from "@react-router/dev/routes";
-import { ROUTES } from "../config/URLS.ts";
+import { PATH } from "../config/URLS.ts";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },
@@ -61,7 +61,7 @@ export async function action({
       },
     });
 
-    return redirect(`/${ROUTES.LOBBY}/${params.cuid}`);
+    return redirect(`/${PATH.LOBBY}/${params.cuid}`);
   }
 }
 

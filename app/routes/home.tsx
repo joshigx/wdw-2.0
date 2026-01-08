@@ -2,16 +2,16 @@ import type { Route } from "../../.react-router/types/app/routes/+types/home.ts"
 //import type { User } from "../generated/prisma/client.ts";
 import { Link } from "react-router";
 import Footer from "../components/footer.tsx";
-import { ROUTES } from "../config/URLS.ts";
+import { PATH } from "../config/URLS.ts";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Josuas Website" },
     { name: "description", content: "Welcome to Josuas Website!" },
   ];
 }
 
-export async function loader({}: Route.LoaderArgs) {
+export async function loader({ }: Route.LoaderArgs) {
   // const prisma: PrismaClient = createPrismaClient();
   // try {
   //   const users: User[] = await prisma.user.findMany({
@@ -34,7 +34,7 @@ export default function Home() {
           Willkommen auf josua-lucas.de
         </h1>
         <Link
-          to={`/${ROUTES.LOBBY}`}
+          to={`/${PATH.LOBBY}`}
 
           className="bg-emerald-800 p-4  text-orange-100 rounded-full"
         >

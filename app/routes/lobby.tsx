@@ -4,7 +4,7 @@ import LobbyNotStarted from "../components/lobby/LobbyNotStarted.tsx";
 import LobbyStarted from "../components/lobby/LobbyStarted.tsx";
 import { redirect, useRevalidator } from "react-router";
 import { useEffect } from "react";
-import { ROUTES } from "../config/URLS.ts";
+import { PATH } from "../config/URLS.ts";
 
 export async function action({
   request,
@@ -24,7 +24,7 @@ export async function action({
       },
     });
 
-    return redirect(`/${ROUTES.GAME}/${params.cuid}`);
+    return redirect(`/${PATH.GAME}/${params.cuid}`);
   } else if (intent === "startGame") {
     console.log("startGameButton geclickt");
 
@@ -33,12 +33,12 @@ export async function action({
     });
 
     console.log("Raum erstellt:", room);
-    return redirect(`/${ROUTES.LOBBY}/${room.id}`);
+    return redirect(`/${PATH.LOBBY}/${room.id}`);
   }
   //neuen Raum inder Datenbanmk erstellen
 }
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
