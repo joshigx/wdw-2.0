@@ -9,7 +9,7 @@ import { Form, redirect } from "react-router";
 import Button, { Color } from "../components/Button.tsx";
 import { PATH } from "../config/URLS.ts";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -51,7 +51,7 @@ export async function action({
 
     console.log(
       "die antwort die gerade für diesen nutzer in der datenbank gespeichert ist: " +
-      user?.answer,
+        user?.answer,
     );
 
     if (user?.answer || room?.isRunning) {
@@ -77,7 +77,7 @@ export async function action({
 
       console.log(
         "Anwort abgeschickt: " + updatedUser.answer + " von Nutzer: " +
-        updatedUser.name,
+          updatedUser.name,
       );
       hasAnsweredSuccesful = true;
       return ({ hasAnsweredSuccesful });

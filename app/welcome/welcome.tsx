@@ -26,14 +26,18 @@ export function Welcome({ denoVersion }: { denoVersion: string }) {
           </div>
         </header>
         <div className="w-full max-w-[300px] space-y-6 px-4">
-          <nav className={`
-            space-y-4 rounded-3xl border border-gray-200 p-6
-            dark:border-gray-700
-          `}>
-            <p className={`
-              text-center leading-6 text-gray-700
-              dark:text-gray-200
-            `}>
+          <nav
+            className={`
+              space-y-4 rounded-3xl border border-gray-200 p-6
+              dark:border-gray-700
+            `}
+          >
+            <p
+              className={`
+                text-center leading-6 text-gray-700
+                dark:text-gray-200
+              `}
+            >
               Deno version {denoVersion}
             </p>
             <ul>
