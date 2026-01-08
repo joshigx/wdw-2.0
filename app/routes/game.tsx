@@ -21,8 +21,6 @@ import ControlBar from "../components/ControlBar.tsx";
 import { onDragEnd } from "../helpers/onDragEnd.ts";
 import type { UserModel } from "../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
-import routes from "../routes.ts";
-import type { RouteConfigEntry } from "@react-router/dev/routes";
 import { PATH } from "../config/URLS.ts";
 
 export function meta({ }: Route.MetaArgs) {
