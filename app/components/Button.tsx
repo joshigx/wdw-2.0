@@ -28,9 +28,12 @@ export default function Button(props: ButtonProps) {
     <button
       disabled={false}
       type={props.type}
-      className={`text-white ${colorClasses[props.bgColor]} 
-            box-border border border-transparent font-medium leading-5 rounded-full
-     text-sm px-4 py-2.5 `}
+      className={`
+        text-white
+        ${colorClasses[props.bgColor]}
+        box-border rounded-full border border-transparent px-4 py-2.5 text-sm
+        leading-5 font-medium
+      `}
       onClick={props.onClick}
     >
       {props.children}

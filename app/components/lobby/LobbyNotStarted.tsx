@@ -20,7 +20,10 @@ export default function LobbyNotStarted() {
         </div>
       </Form>
 
-      <div className="text-black mt-10 bg-blue-50 min-h-24 px-5 pt-5 pb-8 w-100 text-center rounded-4xl">
+      <div className={`
+        mt-10 min-h-24 w-100 rounded-4xl bg-blue-50 px-5 pt-5 pb-8 text-center
+        text-black
+      `}>
         <p>Erklärung:</p>
         <p>
           In diesem Spiel geht es darum, als Gruppe zuzuordnen, welche Antwort

@@ -29,14 +29,18 @@ export async function loader({ }: Route.LoaderArgs) {
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-25">
-        <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)]">
+      <div className="mt-25 flex flex-col items-center justify-center">
+        <h1 className={`
+          mb-8
+          font-[family-name:var(--font-geist-sans)]
+          text-4xl font-bold
+        `}>
           Willkommen auf josua-lucas.de
         </h1>
         <Link
           to={`/${PATH.LOBBY}`}
 
-          className="bg-emerald-800 p-4  text-orange-100 rounded-full"
+          className="rounded-full bg-emerald-800 p-4 text-orange-100"
         >
           Zum 'wer-denkt-was'-Spiel
         </Link>

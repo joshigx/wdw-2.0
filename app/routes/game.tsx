@@ -254,7 +254,10 @@ export default function Game({ loaderData }: Route.ComponentProps) {
                   key={user.id}
                   id={user.id}
                   snapBack={false}
-                  className={`text-black bg-yellow-500 min-h-24 px-4 py-2.5 w-45 text-center rounded cursor-pointer select-none`}
+                  className={`
+                    min-h-24 w-45 cursor-pointer rounded bg-yellow-500 px-4
+                    py-2.5 text-center text-black select-none
+                  `}
                   viewport={viewport}
                   positionsOfDroppable={initialDroppablePositions}
                 >
@@ -270,7 +273,10 @@ export default function Game({ loaderData }: Route.ComponentProps) {
                   key={user.id}
                   droppedOverID={dropedOverID}
                   startPosition={initialDroppablePositions[user.id]}
-                  className={` text-black  min-h-25 px-4 py-2.5 w-50 text-center rounded cursor-pointer select-none`}
+                  className={`
+                    min-h-25 w-50 cursor-pointer rounded px-4 py-2.5 text-center
+                    text-black select-none
+                  `}
                   loggedAnswers={answersSubmitted ? loggedAnswers : null}
                 >
                   {user.name}

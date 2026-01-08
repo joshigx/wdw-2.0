@@ -15,7 +15,7 @@ export default function NextDroppable({ id, children }: NextDraggableProps) {
     <div
       ref={ref}
       style={{ width: 300, height: 300 }}
-      className="bg-amber-600 flex justify-center"
+      className="flex justify-center bg-amber-600"
     >
       {isDropTarget ? "Draggable ist over me" : "Drop something on me"}
       {children}

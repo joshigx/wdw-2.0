@@ -27,10 +27,11 @@ export default function Draggable(props: DraggableProps) {
       style={style}
       {...listeners}
       {...attributes}
-      className="text-white bg-brand box-border bg-amber-700 border border-transparent 
-         hover:bg-brand-strong hover:bg-amber-900 
-         focus:ring-4 focus:ring-brand-medium 
-         shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+      className={`
+        box-border rounded-full border border-transparent bg-amber-700 px-4
+        py-2.5 text-sm leading-5 font-medium text-white shadow-xs
+        focus:ring-4 focus:outline-none
+      `}
     >
       {props.children}
     </button>

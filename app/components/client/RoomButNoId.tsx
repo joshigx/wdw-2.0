@@ -21,7 +21,7 @@ export default function RoomButNoId(props: RoomButNoIdProps) {
                 <Form method="post" className="grid place-items-center gap-5">
                   <input type="hidden" name="intent" value="submitUserName" />
                   <input
-                    className="p-3 bg-white rounded-full text-black"
+                    className="rounded-full bg-white p-3 text-black"
                     type="text"
                     name="userName"
                   />

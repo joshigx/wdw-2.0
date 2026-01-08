@@ -98,7 +98,7 @@ export default function Lobby(props: Route.ComponentProps) {
   }, []);
 
   return (
-    <div className="pl-10 mt-15 grid place-items-center gap-4">
+    <div className="mt-15 grid place-items-center gap-4 pl-10">
       <h1>Willkommen in der Lobby</h1>
       {(!roomId) ? <LobbyNotStarted></LobbyNotStarted> : (
         <LobbyStarted

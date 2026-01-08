@@ -144,7 +144,10 @@ export default function Draggable(props: DraggableProps) {
     <div
       ref={draggableObj.setNodeRef}
       style={style}
-      className={`${props.className} hover:bg-amber-500`}
+      className={`
+        ${props.className}
+        hover:bg-amber-500
+      `}
       {...draggableObj.listeners}
       {...draggableObj.attributes}
     >

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="mt-10 flex flex-col items-center">
       <p>Kontakt:</p>
       <p>Josua Lucas</p>
       <p>mail@josua-lucas.de</p>

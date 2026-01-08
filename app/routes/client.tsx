@@ -145,7 +145,7 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
       <Form method="post" className="grid place-items-center gap-4">
         <input type="hidden" name="intent" value="submitAnswer"></input>
         <input
-          className="p-3 bg-white rounded-full text-black"
+          className="rounded-full bg-white p-3 text-black"
           type="text"
           name="userAnswer"
         />
