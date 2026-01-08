@@ -21,6 +21,9 @@ import ControlBar from "../components/ControlBar.tsx";
 import { onDragEnd } from "../helpers/onDragEnd.ts";
 import type { UserModel } from "../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
+import routes from "../routes.ts";
+import type { RouteConfigEntry } from "@react-router/dev/routes";
+import { ROUTES } from "../config/URLS.ts";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -37,7 +40,7 @@ export async function action({
   const intent = formData.get("intent");
 
   if (intent === "startNewRound") {
-    console.log("StartNewRound BUtton pressed");
+    console.log("StartNewRound Button pressed");
     const roomId = params.cuid;
 
     const _updateUsers = await prisma.user.updateMany({
@@ -58,7 +61,7 @@ export async function action({
       },
     });
 
-    return redirect(`/host/lobby/${params.cuid}`);
+    return redirect(`/${ROUTES.LOBBY}/${params.cuid}`);
   }
 }
 

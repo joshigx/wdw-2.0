@@ -2,6 +2,7 @@ import type { Route } from "../../.react-router/types/app/routes/+types/home.ts"
 //import type { User } from "../generated/prisma/client.ts";
 import { Link } from "react-router";
 import Footer from "../components/footer.tsx";
+import { ROUTES } from "../config/URLS.ts";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -33,7 +34,8 @@ export default function Home() {
           Willkommen auf josua-lucas.de
         </h1>
         <Link
-          to="/host/lobby"
+          to={`/${ROUTES.LOBBY}`}
+
           className="bg-emerald-800 p-4  text-orange-100 rounded-full"
         >
           Zum 'wer-denkt-was'-Spiel

@@ -4,6 +4,7 @@ import LobbyNotStarted from "../components/lobby/LobbyNotStarted.tsx";
 import LobbyStarted from "../components/lobby/LobbyStarted.tsx";
 import { redirect, useRevalidator } from "react-router";
 import { useEffect } from "react";
+import { ROUTES } from "../config/URLS.ts";
 
 export async function action({
   request,
@@ -23,7 +24,7 @@ export async function action({
       },
     });
 
-    return redirect(`/host/game/${params.cuid}`);
+    return redirect(`/${ROUTES.GAME}/${params.cuid}`);
   } else if (intent === "startGame") {
     console.log("startGameButton geclickt");
 
@@ -32,7 +33,7 @@ export async function action({
     });
 
     console.log("Raum erstellt:", room);
-    return redirect(`/host/lobby/${room.id}`);
+    return redirect(`/${ROUTES.LOBBY}/${room.id}`);
   }
   //neuen Raum inder Datenbanmk erstellen
 }

@@ -7,6 +7,7 @@ import RoomButNoId from "../components/client/RoomButNoId.tsx";
 import type { UserModel } from "../generated/prisma/models.ts";
 import { Form, redirect } from "react-router";
 import Button, { Color } from "../components/Button.tsx";
+import { ROUTES } from "../config/URLS.ts";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -96,7 +97,7 @@ export async function action({
     }
 
     console.log("User angelegt: " + user);
-    return redirect(`/client/${params.roomId}/${user?.id}`);
+    return redirect(`/${ROUTES.CLIENT}/${params.roomId}/${user?.id}`);
   }
 }
 
