@@ -24,7 +24,7 @@
     "@dnd-kit/modifiers": "npm:@dnd-kit/modifiers@9.0.0",
     "@dnd-kit/react": "npm:@dnd-kit/react@0.2.1",
     "@dnd-kit/utilities": "npm:@dnd-kit/utilities@3.2.2",
-    "eslint-plugin-readable-tailwind": "npm:eslint-plugin-readable-tailwind@3.0.0",
+    "eslint-plugin-better-tailwindcss": "npm:eslint-plugin-better-tailwindcss@3.8.0",
     "@react-router/dev": "npm:@react-router/dev@7.11.0",
     "@react-router/serve": "npm:@react-router/serve@7.11.0",
     "@std/assert": "jsr:@std/assert@1",
