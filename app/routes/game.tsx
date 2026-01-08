@@ -23,7 +23,7 @@ import type { UserModel } from "../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
 import { PATH } from "../config/URLS.ts";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "wdw Game" },
     { name: "description", content: "Welcome to React Router!" },

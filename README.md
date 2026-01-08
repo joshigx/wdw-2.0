@@ -1,17 +1,7 @@
-# Welcome to React Router!
+# Welcome to wdw-v2
 
-A modern, production-ready template for building full-stack React applications
-using React Router.
+A game to gues what the others think
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
 
 ## Getting Started
 
@@ -41,32 +31,6 @@ Create a production build:
 deno task build
 ```
 
-## Deployment
-
-### Deno Deploy
-
-After running a build, deploy to https://deno.com/deploy with the following
-command:
-
-```bash
-deno run -A jsr:@deno/deployctl deploy --entrypoint server.ts
-```
-
-### DIY Deployment
-
-If you're familiar with deploying Deno applications, the built-in app server is
-production-ready.
-
-Make sure to deploy the output of `deno task build`
-
-```
-├── deno.jsonc
-├── deno.lock
-├── server.ts
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
 
 ## Styling
 
