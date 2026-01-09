@@ -1,5 +1,6 @@
 import { Form } from "react-router";
 import Button, { Color } from "../Button.tsx";
+import { PATH } from "../../config/URLS.ts";
 
 export default function LobbyNotStarted() {
   const startHostingButton = (
@@ -60,7 +61,7 @@ export default function LobbyNotStarted() {
           <br></br>
         </p>
 
-        <a className="text-blue-800" href="/host/game">
+        <a className="text-blue-800" href={`/${PATH.GAME}`}>
           Hier gibt es eine kleinen Demo
         </a>
       </div>

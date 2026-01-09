@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -10,7 +10,7 @@ html,
 body {
   font-family: "Inter Variable", sans-serif;
 
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white dark:bg-slate-900;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;

@@ -6,22 +6,24 @@ import {
   type DragStartEvent,
   type UniqueIdentifier,
 } from "@dnd-kit/core";
-import type { Route } from "./+types/game.ts";
+import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-import prisma from "../lib/prisma.ts";
-import Draggable from "../components/Draggable.tsx";
-import users from "./api/testUsers.json" with { type: "json" };
-import { ClientOnly } from "../components/ClientOnly.tsx";
-import Droppable from "../components/Droppable.tsx";
+import prisma from "../../lib/prisma.ts";
+import Draggable from "../../components/Draggable.tsx";
+import { ClientOnly } from "../../components/ClientOnly.tsx";
+import Droppable from "../../components/Droppable.tsx";
 import { useEffect, useState } from "react";
-import getInitialPositions from "../helpers/calculateGridPosition.ts";
-import getInitialDroppablePositions from "../helpers/calculateDroppablePositions.ts";
-import type { loggedAnswer, Viewport } from "../types/types.ts";
-import ControlBar from "../components/ControlBar.tsx";
-import { onDragEnd } from "../helpers/onDragEnd.ts";
-import type { UserModel } from "../generated/prisma/models/User.ts";
+import getInitialPositions from "../../helpers/calculateGridPosition.ts";
+import getInitialDroppablePositions from "../../helpers/calculateDroppablePositions.ts";
+import type { loggedAnswer, Viewport } from "../../types/types.ts";
+import ControlBar from "../../components/ControlBar.tsx";
+import { onDragEnd } from "../../helpers/onDragEnd.ts";
+import type { UserModel } from "../../generated/prisma/models/User.ts";
 import { redirect } from "react-router";
-import { PATH } from "../config/URLS.ts";
+import { PATH } from "../../config/URLS.ts";
+
+//Loader ausgelagtert
+export { loader } from "./loader.ts";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -61,27 +63,6 @@ export async function action({
 
     return redirect(`/${PATH.LOBBY}/${params.cuid}`);
   }
-}
-
-export async function loader(props: Route.LoaderArgs) {
-  let typedUsers: UserModel[] | null = null;
-
-  //wenn nicht die Demo version läuft, sonder das richtige spiel mit raum id
-  if (props.params.cuid) {
-    const roomId = props.params.cuid;
-    typedUsers = await prisma.user.findMany({
-      where: {
-        locationId: roomId,
-        answer: { not: null },
-      },
-    });
-  } else {
-    typedUsers = users as UserModel[];
-  }
-
-  const _lenght = typedUsers.length;
-
-  return typedUsers;
 }
 
 export default function Game({ loaderData }: Route.ComponentProps) {
