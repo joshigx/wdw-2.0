@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma.ts";
-import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
+import type { Route } from "../../../.react-router/types/app/routes/game/+types/game_short.ts";
 import { redirect } from "react-router";
 import { PATH } from "../../config/URLS.ts";
 

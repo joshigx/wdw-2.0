@@ -6,7 +6,7 @@ import {
   type DragStartEvent,
   type UniqueIdentifier,
 } from "@dnd-kit/core";
-import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
+import type { Route } from "../../../.react-router/types/app/routes/game/+types/game_short.ts";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import Draggable from "../../components/Draggable.tsx";
 import { ClientOnly } from "../../components/ClientOnly.tsx";
