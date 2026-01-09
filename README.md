@@ -1,6 +1,6 @@
 # Welcome to wdw-v2
 
-A game to gues what the others think
+A game to guess what the others think
 
 ## Getting Started
 
