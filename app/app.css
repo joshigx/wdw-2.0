@@ -8,6 +8,8 @@
 
 html,
 body {
+  font-family: "Inter Variable", sans-serif;
+
   @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {

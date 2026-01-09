@@ -2,7 +2,6 @@
 
 A game to gues what the others think
 
-
 ## Getting Started
 
 ### Installation
@@ -30,7 +29,6 @@ Create a production build:
 ```bash
 deno task build
 ```
-
 
 ## Styling
 
