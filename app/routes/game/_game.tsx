@@ -8,7 +8,6 @@ import {
 } from "@dnd-kit/core";
 import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-import prisma from "../../lib/prisma.ts";
 import Draggable from "../../components/Draggable.tsx";
 import { ClientOnly } from "../../components/ClientOnly.tsx";
 import Droppable from "../../components/Droppable.tsx";
@@ -19,51 +18,11 @@ import type { loggedAnswer, Viewport } from "../../types/types.ts";
 import ControlBar from "../../components/ControlBar.tsx";
 import { onDragEnd } from "../../helpers/onDragEnd.ts";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
-import { redirect } from "react-router";
-import { PATH } from "../../config/URLS.ts";
 
 //Loader ausgelagtert
 export { loader } from "./loader.ts";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "wdw Game" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
-}
-
-export async function action({
-  request,
-  params,
-}: Route.ActionArgs) {
-  const formData: FormData = await request.formData();
-  const intent = formData.get("intent");
-
-  if (intent === "startNewRound") {
-    console.log("StartNewRound Button pressed");
-    const roomId = params.cuid;
-
-    const _updateUsers = await prisma.user.updateMany({
-      where: {
-        locationId: roomId, // Filtert nach locationId
-      },
-      data: {
-        answer: null, // Setzt answer auf null
-      },
-    });
-
-    const _updateRoom = await prisma.room.update({
-      where: {
-        id: params.cuid,
-      },
-      data: {
-        isRunning: false,
-      },
-    });
-
-    return redirect(`/${PATH.LOBBY}/${params.cuid}`);
-  }
-}
+export { action } from "./action.ts";
+export { meta } from "./meta.ts";
 
 export default function Game({ loaderData }: Route.ComponentProps) {
   //States
