@@ -5,5 +5,5 @@ export default [
   index("./routes/home.tsx"),
   route(`${PATH.GAME}/:cuid?`, "./routes/game/game_short.tsx"),
   route(`${PATH.LOBBY}/:cuid?`, "./routes/lobby.tsx"),
-  route(`${PATH.CLIENT}/:roomId?/:userId?`, "./routes/client.tsx"),
+  route(`${PATH.CLIENT}/:roomId?/:userId?`, "./routes/user/user.tsx"),
 ] satisfies RouteConfig;

@@ -1,19 +1,18 @@
-import {useState } from "react";
-import type { loggedAnswer, Viewport } from "../../types/types.ts";
+//bietet funktionen und variablen, die für den SPielstand zuständig sind
+
+import { useState } from "react";
+import type { loggedAnswer } from "../../types/types.ts";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 
 export function useGameState(
   users: UserModel[],
   loggedAnswers: loggedAnswer[],
 ) {
-  
   //sagt aus, ob alle Anworten eingeloggt und dann abgeschickt worden
   const [answersSubmitted, setAnswersSubmitted] = useState(false);
 
   //speicherrt die Versuche
   const [attempts, setAttempts] = useState(0);
-
-
 
   //wird ausgelöst, wenn "Antwort prüfen" gedrückt wurde
   function submitAnswers() {

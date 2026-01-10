@@ -22,7 +22,7 @@ export function useDragAndDrop(users: UserModel[]) {
     height: globalThis.innerHeight,
   });
 
-    //wird ausgelöst, wenn die Seite das erste mal geladen wird
+  //wird ausgelöst, wenn die Seite das erste mal geladen wird
   useEffect(() => {
     //fügt event listener für fenster größen änderung hinzu
     const handleResize = () => {

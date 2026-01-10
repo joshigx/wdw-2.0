@@ -5,8 +5,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [reactRouter(), deno(), tailwindcss()],
-    esbuild: {
-    drop: ["console", "debugger"],
+  esbuild: {
+    // drop: ["console", "debugger"],
   },
   environments: {
     ssr: {
