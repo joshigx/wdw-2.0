@@ -1,4 +1,4 @@
-import type { Route } from "../../../.react-router/types/app/routes/game/+types/game_short.ts";
+import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
 import { ClientOnly } from "../../components/ClientOnly.tsx";
 import ControlBar from "../../components/ControlBar.tsx";
 import type { UserModel } from "../../generated/prisma/models/User.ts";

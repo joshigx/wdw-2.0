@@ -1,6 +1,6 @@
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 import prisma from "../../lib/prisma.ts";
-import type { Route } from "../../../.react-router/types/app/routes/game/+types/game_short.ts";
+import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
 import users from "../api/testUsers.json" with { type: "json" };
 
 export async function loader(props: Route.LoaderArgs) {
