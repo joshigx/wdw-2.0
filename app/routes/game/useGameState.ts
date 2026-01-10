@@ -1,34 +1,19 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import type { loggedAnswer, Viewport } from "../../types/types.ts";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 
 export function useGameState(
   users: UserModel[],
   loggedAnswers: loggedAnswer[],
-  setViewport: React.Dispatch<React.SetStateAction<Viewport>>,
 ) {
+  
   //sagt aus, ob alle Anworten eingeloggt und dann abgeschickt worden
   const [answersSubmitted, setAnswersSubmitted] = useState(false);
 
   //speicherrt die Versuche
   const [attempts, setAttempts] = useState(0);
 
-  //wird ausgelöst, wenn die Seite das erste mal geladen wird
-  useEffect(() => {
-    //fügt event listener für fenster größen änderung hinzu
-    const handleResize = () => {
-      setViewport({
-        width: globalThis.innerWidth,
-        height: globalThis.innerHeight,
-      });
-      console.log(
-        "breite: " + globalThis.innerWidth + ", höhe " + globalThis.innerHeight,
-      );
-    };
 
-    globalThis.addEventListener("resize", handleResize);
-    return () => globalThis.removeEventListener("resize", handleResize);
-  }, []);
 
   //wird ausgelöst, wenn "Antwort prüfen" gedrückt wurde
   function submitAnswers() {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { loggedAnswer, Viewport } from "../../types/types.ts";
 import type {
   DragEndEvent,
@@ -21,6 +21,23 @@ export function useDragAndDrop(users: UserModel[]) {
     width: globalThis.innerWidth,
     height: globalThis.innerHeight,
   });
+
+    //wird ausgelöst, wenn die Seite das erste mal geladen wird
+  useEffect(() => {
+    //fügt event listener für fenster größen änderung hinzu
+    const handleResize = () => {
+      setViewport({
+        width: globalThis.innerWidth,
+        height: globalThis.innerHeight,
+      });
+      console.log(
+        "breite: " + globalThis.innerWidth + ", höhe " + globalThis.innerHeight,
+      );
+    };
+
+    globalThis.addEventListener("resize", handleResize);
+    return () => globalThis.removeEventListener("resize", handleResize);
+  }, []);
 
   //beinhaltet ein Array vom Typ loggedAnswer, mit allen bisher eingeloggeten Antworten
   //in der DragEnd Funktion werden die Antworten hinzugefügt / entfernt

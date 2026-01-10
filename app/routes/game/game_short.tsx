@@ -17,7 +17,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
   //identifier-Declaration
   const users: UserModel[] = loaderData;
   const dnd = useDragAndDrop(users);
-  const game = useGameState(users, dnd.loggedAnswers, dnd.setViewport);
+  const game = useGameState(users, dnd.loggedAnswers);
 
   return (
     <div className="">
