@@ -1,7 +1,7 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { type UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 import { type loggedAnswer } from "../types/types.ts";
-import { validateAnswers } from "../helpers/validateAnswers.ts";
+import { validateAnswers } from "../routes/game/validateAnswers.ts";
 
 type Props = {
   children?: ReactNode;
@@ -12,6 +12,7 @@ type Props = {
   draggable?: boolean;
   snapBack?: boolean;
   loggedAnswers: loggedAnswer[] | null;
+  allAnswersLoggedIn: boolean;
 };
 
 export default function Droppable(props: Props) {
@@ -26,7 +27,11 @@ export default function Droppable(props: Props) {
       props.loggedAnswers,
       props.id,
       setLocalAnswerState,
+      props.allAnswersLoggedIn,
     );
+
+    console.log("Die Anzahl der loggedAnswers wurde geändert");
+    
   }, [props.loggedAnswers, props.id]);
 
   const droppableObj = useDroppable({

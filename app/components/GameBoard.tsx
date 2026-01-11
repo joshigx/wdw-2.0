@@ -15,7 +15,6 @@ import type { DroppablePositon } from "../helpers/calculateDroppablePositions.ts
 interface GameBoardProps {
   users: UserModel[];
   dnd: {
-    droppedOverID: UniqueIdentifier | null;
     loggedAnswers: loggedAnswer[];
     setLoggedAnswers: React.Dispatch<React.SetStateAction<loggedAnswer[]>>;
     handleDragStart: (e: DragStartEvent) => void;
@@ -23,9 +22,11 @@ interface GameBoardProps {
     initialPositions: DraggablePositon;
     initialDroppablePositions: DroppablePositon;
     viewport: Viewport;
+    
   };
 
   answersSubmitted: boolean;
+  allAnswersLoggedIn: boolean;
 }
 
 export default function GameBoard(props: GameBoardProps) {
@@ -60,13 +61,13 @@ export default function GameBoard(props: GameBoardProps) {
             <Droppable
               id={user.id}
               key={user.id}
-              droppedOverID={props.dnd.droppedOverID}
+              allAnswersLoggedIn= {props.allAnswersLoggedIn}
               startPosition={props.dnd.initialDroppablePositions[user.id]}
               className={`
                     min-h-25 w-50 cursor-pointer rounded px-4 py-2.5 text-center
                     text-black select-none
                   `}
-              loggedAnswers={props.answersSubmitted
+              loggedAnswers={(props.answersSubmitted && props.allAnswersLoggedIn)
                 ? props.dnd.loggedAnswers
                 : null}
             >

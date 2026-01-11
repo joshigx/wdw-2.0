@@ -2,7 +2,7 @@ import shuffleArray, { createArrayFromNtoM } from "./fisherYatesShuffle.ts";
 import {
   controlBarHeight,
   DRAGGABLE_GRID_CONFIG as GRID_CONFIG,
-} from "./config.ts";
+} from "../config/DragAndDropConfig.ts";
 import type { User, Viewport } from "../types/types.ts";
 
 export type DraggablePositon = Record<string, { x: number; y: number }>;

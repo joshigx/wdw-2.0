@@ -1,15 +1,29 @@
 //bietet funktionen und variablen, die für den SPielstand zuständig sind
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { loggedAnswer } from "../../types/types.ts";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 
 export function useGameState(
   users: UserModel[],
   loggedAnswers: loggedAnswer[],
+   setAllAnswersLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+
 ) {
   //sagt aus, ob alle Anworten eingeloggt und dann abgeschickt worden
   const [answersSubmitted, setAnswersSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (loggedAnswers.length === users.length) {
+      setAllAnswersLoggedIn(true)
+    }
+
+    else {
+      setAllAnswersLoggedIn(false)
+      setAnswersSubmitted(false)
+    }
+    
+  }, [loggedAnswers]);
 
   //speicherrt die Versuche
   const [attempts, setAttempts] = useState(0);
@@ -23,6 +37,7 @@ export function useGameState(
       setAttempts((s) => s + 1);
 
       setAnswersSubmitted(true);
+
     } else {
       alert(`Du hast noch nicht alle Karten eingeloggt`);
       setAnswersSubmitted(false);
@@ -31,6 +46,7 @@ export function useGameState(
 
   return {
     answersSubmitted,
+    setAnswersSubmitted,
     attempts,
     submitAnswers,
   };

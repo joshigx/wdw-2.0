@@ -1,7 +1,7 @@
 import {
   controlBarHeight,
   DROPPABLE_GRID_CONFIG as GRID_CONFIG,
-} from "./config.ts";
+} from "../config/DragAndDropConfig.ts";
 import type { User, Viewport } from "../types/types.ts";
 
 interface CardsPerSide {

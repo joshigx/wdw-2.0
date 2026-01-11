@@ -3,18 +3,16 @@ import type { loggedAnswer, Viewport } from "../../types/types.ts";
 import type {
   DragEndEvent,
   DragStartEvent,
-  UniqueIdentifier,
 } from "@dnd-kit/core";
-import { onDragEnd } from "../../helpers/onDragEnd.ts";
+import { onDragEnd } from "./onDragEnd.ts";
 import getInitialPositions from "../../helpers/calculateGridPosition.ts";
 import getInitialDroppablePositions from "../../helpers/calculateDroppablePositions.ts";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 
-export function useDragAndDrop(users: UserModel[]) {
+export function useDragAndDrop(
+  users: UserModel[]
+) {
   //speicht die id der dropzone, über der zuletzt etwas losgelassen wurde
-  const [droppedOverID, setDroppedOverID] = useState<UniqueIdentifier | null>(
-    null,
-  );
 
   //speichert die aktuelle viewport größe
   const [viewport, setViewport] = useState<Viewport>({
@@ -57,11 +55,11 @@ export function useDragAndDrop(users: UserModel[]) {
 
   //wird ausgelöst, wenn das ziehen beendet wird und das item losgelassen wird
   const handleDragEnd = (e: DragEndEvent) => {
-    onDragEnd(e, loggedAnswers, setLoggedAnswers, setDroppedOverID);
+    onDragEnd(e, loggedAnswers, setLoggedAnswers);
+    console.log("Ich wurde über " + e.over?.id + " losgelassen (neu)");
   };
 
   return ({
-    droppedOverID,
     loggedAnswers,
     setLoggedAnswers,
     handleDragStart,

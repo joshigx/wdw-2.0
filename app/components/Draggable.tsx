@@ -5,53 +5,12 @@ import type { Viewport } from "../types/types.ts";
 import {
   DRAGGABLE_GRID_CONFIG,
   DROPPABLE_GRID_CONFIG,
-} from "../helpers/config.ts";
+} from "../config/DragAndDropConfig.ts";
 import type { Transform } from "@dnd-kit/utilities";
 import { type Over, useDraggable } from "@dnd-kit/core";
 import {
   type DroppablePositon,
 } from "../helpers/calculateDroppablePositions.ts";
-
-/**
- * Properties for a Draggable component.
- *
- * Required:
- * - id: A unique string identifier for this draggable instance. This is used to
- *   identify and distinguish draggable items (for accessibility, rehydration,
- *   or managing multiple draggables).
- *
- * Optional props:
- * - children: ReactNode to be rendered inside the draggable container.
- *
- * - startPosition: An object with numeric x and y coordinates that specify the
- *   initial position of the draggable element. Coordinates are in pixels and
- *   should be interpreted relative to the draggable container or the element's
- *   positioning context.
- *
- * - className: Optional CSS class name(s) applied to the draggable wrapper so
- *   callers can style or theme the element.
- *
- * - snapBack: When true, the draggable will animate or reset back to its
- *   startPosition (or original layout position) after a drag ends. When false,
- *   the element will remain where the user released it. Default: false.
- *
- * - onDragEnd: Callback invoked when a drag operation completes. The callback
- *   receives a DragEndEvent (from the underlying drag implementation) that
- *   typically contains information such as the final position, velocity, and
- *   the original event. Consumers can use this to persist state, trigger
- *   side-effects, or prevent the snap-back behavior.
- *
- * @remarks
- * - Ensure `id` is unique among sibling draggables to avoid collisions.
- * - The exact shape of DragEndEvent depends on the drag library in use; import
- *   or reference the appropriate type from that library to get full typings.
- *
- * @example
- * // Typical usage:
- * // <Draggable id="item-1" startPosition={{ x: 0, y: 0 }} snapBack onDragEnd={handleEnd}>
- * //   <Card />
- * // </Draggable>
- */
 
 type DraggableProps = {
   id: string;
