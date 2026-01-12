@@ -3,7 +3,7 @@ interface LogInButtonProps {
   onClick?: () => void;
 }
 
-export default function LogInButton(props: LogInButtonProps) {
+ function _LogInButton(props: LogInButtonProps) {
   return (
     <>
       <button

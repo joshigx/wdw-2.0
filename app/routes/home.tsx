@@ -1,7 +1,7 @@
 import type { Route } from "../../.react-router/types/app/routes/+types/home.ts";
 //import type { User } from "../generated/prisma/client.ts";
 import { Link } from "react-router";
-import Footer from "../components/footer.tsx";
+import Footer from "../components/general/footer.tsx";
 import { PATH } from "../config/URLS.ts";
 
 export function meta({}: Route.MetaArgs) {

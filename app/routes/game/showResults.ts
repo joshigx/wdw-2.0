@@ -3,30 +3,31 @@ import type { loggedAnswer } from "../../types/types.ts";
 
 //wird in Droppable aufgerufen
 
-
-export function validateAnswers(
+export function showResults(
   loggedAnswers: loggedAnswer[] | null,
   droppableId: UniqueIdentifier,
   setLocalAnswerState: (value: number) => void,
-  allAnswersLoggedIn: boolean
+  isShowingResults: boolean
 ) {
-  if (loggedAnswers) {
-    console.log("Alles eingeloggt (neu): " + allAnswersLoggedIn);
-    
+  if (isShowingResults && loggedAnswers) {
+    //iterates over every element in loggedAnswers
     loggedAnswers.forEach((answer) => {
+
+      //if this droppable-Element found it's answer
       if (answer.droppableZoneId === droppableId) {
 
+        //it tests if it's answerId matches his own Id, then the anser is correct
         if (answer.answerId === answer.droppableZoneId) {
-          //richtige Anwort
           setLocalAnswerState(1);
+          
         } else {
           setLocalAnswerState(-1);
         }
       }
     });
-  } else {
+  } 
+  else if (isShowingResults===false) {
+    //set color to gray
     setLocalAnswerState(0);
-    console.log("setLocalAnswerState 0 wurde aufgerufen");
-    
   }
 }

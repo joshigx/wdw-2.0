@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import Button, { Color } from "./Button.tsx";
+import Button, { Color } from "../general/Button.tsx";
 import { Form } from "react-router";
 
 interface ControlBarProps {

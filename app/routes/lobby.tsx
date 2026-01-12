@@ -77,8 +77,6 @@ clientLoader.hydrate = true;
 
 export function HydrateFallback() {
   return <div>Loading...</div>;
-
-
 }
 
 export default function LobbyManager(props: Route.ComponentProps) {
@@ -87,7 +85,6 @@ export default function LobbyManager(props: Route.ComponentProps) {
   //  const id = props.loaderData.props.params.cuid;
 
   const revalidator = useRevalidator();
-
 
   useEffect(() => {
     // Alle 3 Sekunden Daten neu laden
@@ -99,13 +96,5 @@ export default function LobbyManager(props: Route.ComponentProps) {
     return () => clearInterval(interval);
   }, []);
 
-
-
-  
-  
-
-
-  return (
-    <Lobby roomId={roomId} users={users} origin={origin}></Lobby>
-  );
+  return <Lobby roomId={roomId} users={users} origin={origin}></Lobby>;
 }

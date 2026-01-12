@@ -1,5 +1,5 @@
 import { Form } from "react-router";
-import Button, { Color } from "../Button.tsx";
+import Button, { Color } from "../general/Button.tsx";
 import { PATH } from "../../config/URLS.ts";
 
 export default function LobbyNotStarted() {

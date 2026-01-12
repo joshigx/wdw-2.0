@@ -1,5 +1,5 @@
 import { Form } from "react-router";
-import Button, { Color } from "../Button.tsx";
+import Button, { Color } from "../general/Button.tsx";
 
 export default function RoomAndId() {
   return (

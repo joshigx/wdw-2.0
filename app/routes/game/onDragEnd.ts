@@ -1,30 +1,19 @@
 //usend in game.tsx
 
-import type { DragEndEvent} from "@dnd-kit/core";
+import type { DragEndEvent } from "@dnd-kit/core";
 import type { loggedAnswer } from "../../types/types.ts";
 
 export function onDragEnd(
   e: DragEndEvent,
   loggedAnswers: loggedAnswer[],
-  setLoggedAnswers: React.Dispatch<React.SetStateAction<loggedAnswer[]>>
+  setLoggedAnswers: React.Dispatch<React.SetStateAction<loggedAnswer[]>>,
 ) {
-
-
-  console.log("OnDragEnd wird ausgeführt");
-  console.log(e.over?.id);
-  
-  
-
   const isOverDroppable: boolean = !!e.over;
   const droppableIsOccupied: boolean = loggedAnswers.some((item) =>
     item.droppableZoneId === e.over?.id
   );
 
   if (isOverDroppable && !droppableIsOccupied) {
-    console.log("Wurde über leerer DroppZOne losgelassen "+ droppableIsOccupied);
-    
-
-
     setLoggedAnswers((prev) => {
       // a) Erst altes Vorkommen dieser Antwort entfernen (egal wo sie war)
       //diese funktion führt über jedem Element des Arrays diese Prüffunktion aus und behält nur die,
@@ -36,22 +25,14 @@ export function onDragEnd(
         ...filtered,
         { droppableZoneId: e.over!.id, answerId: e.active.id },
       ];
-
-
     });
-
-
-
-
   } else if (isOverDroppable && droppableIsOccupied) {
     console.log(
       "Über dieser dropzone befindet sich bereits etwas, deswegen wird diese anwort nicht eingeloggt",
     );
 
-
-    
+    //TODO: doppeltes EInloggen verhindern
   } else if (!isOverDroppable) {
-
     console.log("Das Draggable wurde nicht über einer dropzone losgelassen");
     //ebenfalls ausloggen
     //ausloggfunktion bauen und dann doppelten code ersetzen

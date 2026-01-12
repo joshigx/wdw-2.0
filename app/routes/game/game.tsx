@@ -1,10 +1,10 @@
 import type { Route } from "../../../.react-router/types/app/routes/game/+types/game.ts";
-import { ClientOnly } from "../../components/ClientOnly.tsx";
-import ControlBar from "../../components/ControlBar.tsx";
+import { ClientOnly } from "../../components/general/ClientOnly.tsx";
+import ControlBar from "../../components/game/ControlBar.tsx";
 import type { UserModel } from "../../generated/prisma/models/User.ts";
 import { useDragAndDrop } from "./useDragAndDrop.ts";
 import { useGameState } from "./useGameState.ts";
-import GameBoard from "../../components/GameBoard.tsx";
+import GameBoard from "../../components/game/GameBoard.tsx";
 import { useState } from "react";
 
 //Loader ausgelagtert
@@ -15,15 +15,10 @@ export { meta } from "./meta.ts";
 export default function Game({ loaderData }: Route.ComponentProps) {
   //States
 
-  const [allAnswersLoggedIn, setAllAnswersLoggedIn] = useState(false);
-
-
-
   //identifier-Declaration
   const users: UserModel[] = loaderData;
   const dnd = useDragAndDrop(users);
-  const game = useGameState(users, dnd.loggedAnswers, setAllAnswersLoggedIn);
-  
+  const game = useGameState(users, dnd.loggedAnswers);
 
   return (
     <div className="">
@@ -31,8 +26,7 @@ export default function Game({ loaderData }: Route.ComponentProps) {
         <GameBoard
           dnd={dnd}
           users={users}
-          answersSubmitted={game.answersSubmitted}
-          allAnswersLoggedIn={allAnswersLoggedIn}
+          showResults={game.showResults}
         >
         </GameBoard>
         <ControlBar

@@ -1,6 +1,6 @@
 import { Form } from "react-router";
 import type { RoomModel } from "../../generated/prisma/models/Room.ts";
-import Button, { Color } from "../Button.tsx";
+import Button, { Color } from "../general/Button.tsx";
 
 interface RoomButNoIdProps {
   room: RoomModel | null;

@@ -1,7 +1,7 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { type UniqueIdentifier, useDroppable } from "@dnd-kit/core";
-import { type loggedAnswer } from "../types/types.ts";
-import { validateAnswers } from "../routes/game/validateAnswers.ts";
+import { type loggedAnswer } from "../../types/types.ts";
+import { showResults as handleResults } from "../../routes/game/showResults.ts";
 
 type Props = {
   children?: ReactNode;
@@ -12,43 +12,32 @@ type Props = {
   draggable?: boolean;
   snapBack?: boolean;
   loggedAnswers: loggedAnswer[] | null;
-  allAnswersLoggedIn: boolean;
+  isShowingResults: boolean;
 };
 
 export default function Droppable(props: Props) {
-  //isOver gibt es auch noch
 
   //0 = noch nichts eingeloggt (standard), 1 richtige Anwrot, -1 falsche antwort
   const [localAnswerState, setLocalAnswerState] = useState(0);
+  const thisDroppableId = props.id;
 
-  //Valuiert die Antworten aus
-  useEffect(() => {
-    validateAnswers(
-      props.loggedAnswers,
-      props.id,
-      setLocalAnswerState,
-      props.allAnswersLoggedIn,
-    );
-
-    console.log("Die Anzahl der loggedAnswers wurde geändert");
-    
-  }, [props.loggedAnswers, props.id]);
 
   const droppableObj = useDroppable({
-    id: props.id,
+    id: thisDroppableId,
   });
 
-  //const [textColor, setTextColor] = useState<string>("undefined")
-  //const textColor = droppable.isOver ? "green" : "white";
 
+
+  //handleResult
   useEffect(() => {
-    if (props.id === props.droppedOverID) {
-      console.log(
-        "Über mir (" + props.id + ") wurde etwas gedroppt." +
-          props.droppedOverID,
-      );
-    }
-  }, [props.droppedOverID]);
+    handleResults(
+      props.loggedAnswers,
+      thisDroppableId,
+      setLocalAnswerState,
+      props.isShowingResults
+    );
+  }, [props.isShowingResults, props.id]);
+
 
   const style = {
     //color: textColor,
@@ -65,15 +54,14 @@ export default function Droppable(props: Props) {
       className={`
         ${props.className}
         ${props.startPosition?.customStyle}
-        ${
-        droppableObj.isOver
+        ${droppableObj.isOver
           ? "bg-gray-500"
           : ((localAnswerState === 0)
             ? "bg-gray-300"
             : (localAnswerState === -1
               ? "bg-red-700"
               : (localAnswerState === 1 ? "bg-green-600" : "bg-gray-300")))
-      }
+        }
       `}
     >
       {props.children}

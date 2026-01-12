@@ -1,16 +1,16 @@
 //import { CSS } from '@dnd-kit/utilities';
 import { type ReactNode, useEffect, useState } from "react";
-import type { DragEndEvent } from "../hooks/useCustomDraggable.ts";
-import type { Viewport } from "../types/types.ts";
+import type { DragEndEvent } from "../../hooks/useCustomDraggable.ts";
+import type { Viewport } from "../../types/types.ts";
 import {
   DRAGGABLE_GRID_CONFIG,
   DROPPABLE_GRID_CONFIG,
-} from "../config/DragAndDropConfig.ts";
+} from "../../config/DragAndDropConfig.ts";
 import type { Transform } from "@dnd-kit/utilities";
 import { type Over, useDraggable } from "@dnd-kit/core";
 import {
   type DroppablePositon,
-} from "../helpers/calculateDroppablePositions.ts";
+} from "../../helpers/calculateDroppablePositions.ts";
 
 type DraggableProps = {
   id: string;
@@ -24,6 +24,8 @@ type DraggableProps = {
 };
 
 export default function Draggable(props: DraggableProps) {
+
+  
   const { snapBack = false } = props;
   const [position, setPosition] = useState({
     x: (props.startPosition?.x || 0),
